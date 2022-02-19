@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
-    public float MovementSpeed = 3;
-    public float jumpForce = 1; 
+    // With 4.2 gravity scale
+    public float MovementSpeed = 12;
+    public float jumpForce = 14; 
     public ProjectileBehavior ProjectilePrefab;
     public Transform launchPoint;
 
@@ -40,7 +39,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetButtonDown("Fire1")  && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-           Instantiate(ProjectilePrefab, launchPoint.position, transform.rotation);
+            Instantiate(ProjectilePrefab, launchPoint.position, transform.rotation);
         }
     }
 }
