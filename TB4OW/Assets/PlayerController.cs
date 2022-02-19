@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
     public ProjectileBehavior ProjectilePrefab;
     public Transform launchPoint;
 
+
+    public float fireRate = 1f;
+    private float nextFire = 0.0f;
+
     private Rigidbody2D _rigidbody;
 
     // Start is called before the first frame update
@@ -29,8 +33,9 @@ public class PlayerController : MonoBehaviour
             _rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
         
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButtonDown("Fire1")  && Time.time > nextFire)
         {
+            nextFire = Time.time + fireRate;
            Instantiate(ProjectilePrefab, launchPoint.position, transform.rotation);
         }
     }
