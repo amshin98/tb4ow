@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - projectile
+  - 'Bucket '
   layers:
   - Default
   - TransparentFX

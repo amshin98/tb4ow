@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 14; 
     public ProjectileBehavior ProjectilePrefab;
     public Transform launchPoint;
-
+    private bool canShoot; 
+    private bool bucketPickUp; 
 
     public float fireRate = 1f;
     private float nextFire = 0.0f;
@@ -19,6 +20,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+       
+        bucketPickUp = false; 
     }
 
     // Update is called once per frame
@@ -36,10 +39,48 @@ public class PlayerController : MonoBehaviour
             _rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
         
+        if(canShoot){
         if(Input.GetButtonDown("Fire1")  && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             Instantiate(ProjectilePrefab, launchPoint.position, transform.rotation);
         }
+        }
+
+        if(Input.GetButtonDown("Fire2") && bucketPickUp){
+            canShoot = true;
+        }
+        Debug.Log(bucketPickUp);
+
+      
     }
+
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+  
+        if (collision.gameObject.name == "Bucket") //checks if its on bucket 
+        {
+          
+          bucketPickUp = true; 
+         
+        }  
+
+
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+  
+        if (collision.gameObject.name == "Bucket") //checks if its on bucket 
+        {
+          
+          bucketPickUp = false; 
+        }  
+
+
+    }
+    
+
 }
