@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     // Weapon
     public WeaponController curWeapon;
+    public float pickupRange = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +48,8 @@ public class PlayerController : MonoBehaviour
             if(curWeapon != null)
             {
                 // Drop weapon
+                curWeapon.transform.parent = null;
+                curWeapon = null;
             }
             else
             {
