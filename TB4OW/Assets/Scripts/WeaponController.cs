@@ -3,33 +3,60 @@
 public abstract class WeaponController : MonoBehaviour
 {
     private float _fireRate;
-
     private float _nextFire;
 
-    public WeaponController(float fireRate)
+    private Vector3 _equipPos;
+
+    private bool _equipped;
+
+    public WeaponController(float fireRate, Vector3 equipPos)
     {
         _fireRate = fireRate;
         _nextFire = 0.0f;
+
+        _equipPos = equipPos;
+
+        _equipped = false;
     }
 
-    public float GetFireRate()
+    public void SetEquipped(bool equipped)
     {
-        return _fireRate;
+        _equipped = equipped;
     }
+
+    public bool GetEquipped()
+    {
+        return _equipped;
+    }
+
+    public abstract void ToggleEquipped();
 
     // Handles dealing damage/knockback. For now, destroy targets but in
     // future change to knock back player
-    void OnTriggerEnter2D(Collider2D collider)
+    public void OnTriggerEnter2D(Collider2D collider)
     {
-        string curTag = collider.gameObject.tag;
-        if (curTag == "destructable")
+        if (_equipped)
         {
-            Destroy(collider.gameObject);
+            string curTag = collider.gameObject.tag;
+            if (curTag == "destructable")
+            {
+                Destroy(collider.gameObject);
+            }
+            else if (curTag == "player")
+            {
+                Debug.Log("KNOCKBACK");
+            }
+
+            Debug.Log("AAAAAAA");
+            AdditionalTriggerStep(collider);
         }
-        else if (curTag == "player")
-        {
-            Debug.Log("KNOCKBACK");
-        }
+    }
+
+    // To be overridden. Additional step when OnTriggerEnter2D is invoked.
+    // Used to destroy projectile.
+    public virtual void AdditionalTriggerStep(Collider2D collider)
+    {
+        // Do nothing
     }
 
     // Handle attacking
@@ -40,6 +67,12 @@ public abstract class WeaponController : MonoBehaviour
             _nextFire = Time.time + _fireRate;
             UseWeapon();
         }
+    }
+
+    // Handle moving the weapon to its starting position relative to player
+    public void Equip()
+    {
+        gameObject.transform.localPosition = _equipPos;
     }
 
 

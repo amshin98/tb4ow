@@ -139,7 +139,8 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 7986960856216423950, guid: 6decd159d654b1d4d858edb6b909be1c,
     type: 3}
   launchPoint: {fileID: 1408831520269196075}
-  fireRate: 1
+  curWeapon: {fileID: 0}
+  pickupRange: 1
 --- !u!1 &1408831520269196074
 GameObject:
   m_ObjectHideFlags: 0
