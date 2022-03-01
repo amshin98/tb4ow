@@ -7,7 +7,10 @@ public class ProjectileBehavior : WeaponController
     public static float Speed = 15f;
     public static float _lifetime = 5f;
 
-    ProjectileBehavior() : base(0, new Vector3()) { }
+    ProjectileBehavior() : base(0, new Vector3())
+    {
+        base.SetEquipped(true);
+    }
 
     private void Start()
     {
@@ -25,8 +28,10 @@ public class ProjectileBehavior : WeaponController
 
     override public void AdditionalTriggerStep(Collider2D collider)
     {
-        Debug.Log("FJLKASDJFKLAJDSF");
-        Destroy(gameObject);
+        if (collider.gameObject.layer != 8)
+        {
+            Destroy(gameObject);
+        }
     }
 
     override public void ToggleEquipped()

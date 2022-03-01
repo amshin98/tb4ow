@@ -38,6 +38,8 @@ public abstract class WeaponController : MonoBehaviour
         if (_equipped)
         {
             string curTag = collider.gameObject.tag;
+
+            Debug.Log(curTag);
             if (curTag == "destructable")
             {
                 Destroy(collider.gameObject);
@@ -46,8 +48,6 @@ public abstract class WeaponController : MonoBehaviour
             {
                 Debug.Log("KNOCKBACK");
             }
-
-            Debug.Log("AAAAAAA");
             AdditionalTriggerStep(collider);
         }
     }
