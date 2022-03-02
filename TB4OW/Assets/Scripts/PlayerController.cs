@@ -15,17 +15,27 @@ public class PlayerController : MonoBehaviour
     public WeaponController curWeapon;
     public float pickupRange = 10f;
     private Collider2D _collider;
+    public int curHealth;
+    public int maxHealth;
+
+    public HealthBar healthBar;
 
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
+        healthBar.setMaxHealth(maxHealth);
+        curHealth = maxHealth; 
+        Debug.Log(curHealth);
+        Debug.Log(maxHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+       // Debug.Log(curHealth);
         var movement = Input.GetAxisRaw("Horizontal");
         transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
 
@@ -36,12 +46,15 @@ public class PlayerController : MonoBehaviour
         if(Input.GetButtonDown("Jump") && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
         {
             _rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            damage(20);
+            
         }
         
         // Attacking
         if(Input.GetButtonDown("Fire1") && curWeapon != null)
         {
             curWeapon.Attack();
+            
         }
 
         // TODO: pickup
@@ -87,5 +100,10 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+        public void damage(int value){
+            curHealth -= value;
+            healthBar.setSliderHealth(curHealth);
     }
 }

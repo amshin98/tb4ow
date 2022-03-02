@@ -9,6 +9,7 @@ public abstract class WeaponController : MonoBehaviour
 
     private bool _equipped;
 
+
     public WeaponController(float fireRate, Vector3 equipPos)
     {
         _fireRate = fireRate;
