@@ -23,13 +23,16 @@ public class MeleeController : WeaponController
 
     private static float _returnTime = 0.08f;
 
-    public MeleeController(float swingSpeed, float delay) : base(swingSpeed + delay)
+    public MeleeController(float swingSpeed, float delay, Vector3 equipPos) :
+        base(swingSpeed + delay, equipPos)
     {
         _swingSpeed = swingSpeed;
 
         _swingStatus = SwingStatus.IDLE;
         _swingStatusStartTime = 0.0f;
         _swingEndTime = 9999999f;
+
+        _startPosition = equipPos;
     }
 
     private void Start()
@@ -37,7 +40,6 @@ public class MeleeController : WeaponController
         _startRotation = new Vector3(0, 0, 0);
         _endRotation = new Vector3(0, 0, -140);
 
-        _startPosition = transform.localPosition;
         _endPosition = _startPosition + new Vector3(0.12f, -0.35f, 0);
     }
 
@@ -81,6 +83,11 @@ public class MeleeController : WeaponController
                 transform.localRotation = newRotation;
             }
         }
+    }
+
+    public override void ToggleEquipped()
+    {
+        base.SetEquipped(!base.GetEquipped());
     }
 
     override public void UseWeapon()
