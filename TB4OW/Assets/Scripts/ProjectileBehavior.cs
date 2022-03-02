@@ -1,13 +1,17 @@
 using UnityEngine;
 
-public class ProjectileBehavior : MonoBehaviour
+// Abstract to inherit the OnTriggerEnter2D
+public class ProjectileBehavior : WeaponController
 {
 
-    public float Speed = 15f;
-    // Start is called before the first frame update
-    void Start()
+    public static float Speed = 15f;
+    public static float _lifetime = 5f;
+
+    ProjectileBehavior() : base(0) { }
+
+    private void Start()
     {
-        
+        Destroy(gameObject, _lifetime);
     }
 
     // Update is called once per frame
@@ -16,8 +20,13 @@ public class ProjectileBehavior : MonoBehaviour
         transform.position += transform.right * Time.deltaTime * Speed; 
     }
 
-
-    private void OnCollisionEnter2D(Collision2D collision){
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         Destroy(gameObject);
+    }
+
+    override public void UseWeapon()
+    {
+        // Do nothing
     }
 }

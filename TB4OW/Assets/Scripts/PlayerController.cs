@@ -9,11 +9,10 @@ public class PlayerController : MonoBehaviour
     public ProjectileBehavior ProjectilePrefab;
     public Transform launchPoint;
 
-
-    public float fireRate = 1f;
-    private float nextFire = 0.0f;
-
     private Rigidbody2D _rigidbody;
+
+    // Weapon
+    public WeaponController curWeapon;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +26,7 @@ public class PlayerController : MonoBehaviour
         var movement = Input.GetAxisRaw("Horizontal");
         transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
 
-
+        // Movement
         if(!Mathf.Approximately(0, movement)){
             transform.rotation = movement < 0 ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
         }
@@ -36,10 +35,23 @@ public class PlayerController : MonoBehaviour
             _rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
         
-        if(Input.GetButtonDown("Fire1")  && Time.time > nextFire)
+        // Attacking
+        if(Input.GetButtonDown("Fire1") && curWeapon != null)
         {
-            nextFire = Time.time + fireRate;
-            Instantiate(ProjectilePrefab, launchPoint.position, transform.rotation);
+            curWeapon.Attack();
+        }
+
+        // TODO: pickup
+        if(Input.GetButtonDown("Fire2"))
+        {
+            if(curWeapon != null)
+            {
+                // Drop weapon
+            }
+            else
+            {
+                // Check for weapon pickup
+            }
         }
     }
 }
