@@ -13,16 +13,15 @@ public class EnemyAI : MonoBehaviour
     public float pathUpdateSeconds = 0.5f;
 
     [Header("Physics")]
-    public float speed = 200f;
     public float nextWaypointDistance = 3f;
     public float jumpNodeHeightRequirement = 0.8f;
-    public float jumpModifier = 0.3f;
     public float jumpCheckOffset = 0.1f;
 
     [Header("Custom Behavior")]
     public bool followEnabled = true;
     public bool jumpEnabled = true;
     public bool directionLookEnabled = true;
+    public PlayerController playerRef = null;
 
     private Path path;
     private int currentWaypoint = 0;
@@ -32,8 +31,12 @@ public class EnemyAI : MonoBehaviour
 
     public void Start()
     {
+        if (playerRef == null)
+            playerRef = GetComponent<PlayerController>();
+
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        playerRef.isAI = true;
 
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
     }
@@ -73,19 +76,18 @@ public class EnemyAI : MonoBehaviour
 
         // Direction Calculation
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
-
+        bool jump = false;
         // Jump
         if (jumpEnabled && isGrounded)
         {
             if (direction.y > jumpNodeHeightRequirement)
             {
-                rb.AddForce(Vector2.up * speed * jumpModifier);
+                jump = true;
             }
         }
 
         // Movement
-        rb.AddForce(force);
+        playerRef.MovePlayer(direction.normalized.x, jump);
 
         // Next Waypoint
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
