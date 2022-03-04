@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void WeaponInteract()
+    public void WeaponInteract()
     {
         if (curWeapon != null)
         {

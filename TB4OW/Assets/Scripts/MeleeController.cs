@@ -23,8 +23,8 @@ public class MeleeController : WeaponController
 
     private static float _returnTime = 0.08f;
 
-    public MeleeController(float swingSpeed, float delay, Vector3 equipPos) :
-        base(swingSpeed + delay, equipPos)
+    public MeleeController(float swingSpeed, float delay, Vector3 equipPos, SpriteRenderer spriteRenderer) :
+        base(swingSpeed + delay, equipPos, spriteRenderer)
     {
         _swingSpeed = swingSpeed;
 

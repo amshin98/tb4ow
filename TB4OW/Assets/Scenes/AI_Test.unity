@@ -396,6 +396,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1243119332}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1202587556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1202587557}
+  m_Layer: 9
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1202587557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202587556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1923886024}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1243119332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -524,7 +554,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 46433263
-  m_SortingLayer: -1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 64bc51c91cffcdb47aa7fffddf8a8411, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -565,6 +595,7 @@ GameObject:
   - component: {fileID: 1923886021}
   - component: {fileID: 1923886026}
   - component: {fileID: 1923886025}
+  - component: {fileID: 1923886027}
   m_Layer: 9
   m_Name: AI_player
   m_TagString: Untagged
@@ -669,7 +700,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.49, y: -2.57, z: -3.4394531}
   m_LocalScale: {x: 4.5818, y: 4.5818, z: 4.5818}
-  m_Children: []
+  m_Children:
+  - {fileID: 1202587557}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -716,14 +748,35 @@ MonoBehaviour:
   target: {fileID: 883646349}
   activateDistance: 50
   pathUpdateSeconds: 0.1
-  speed: 3000
   nextWaypointDistance: 3
   jumpNodeHeightRequirement: 0.8
-  jumpModifier: 0.4
   jumpCheckOffset: 0.07
   followEnabled: 1
   jumpEnabled: 1
   directionLookEnabled: 1
+  selfPlayerRef: {fileID: 0}
+  otherPlayerRef: {fileID: 0}
+  sceneWeapons: []
+--- !u!114 &1923886027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923886020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab1e84e2a602454ca7dbdc5365bee43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementSpeed: 12
+  jumpForce: 14
+  ProjectilePrefab: {fileID: 7986960856216423950, guid: 6decd159d654b1d4d858edb6b909be1c,
+    type: 3}
+  launchPoint: {fileID: 1202587557}
+  curWeapon: {fileID: 0}
+  pickupRange: 10
+  isAI: 1
 --- !u!1 &2105368941
 GameObject:
   m_ObjectHideFlags: 0

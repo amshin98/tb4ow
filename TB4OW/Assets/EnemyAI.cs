@@ -8,46 +8,87 @@ using Pathfinding;
 public class EnemyAI : MonoBehaviour
 {
     [Header("Pathfinding")]
-    public Transform target;
-    public float activateDistance = 50f;
-    public float pathUpdateSeconds = 0.5f;
+    [SerializeField] private Transform target;
+    [SerializeField] private  float activateDistance = 50f;
+    [SerializeField] private  float pathUpdateSeconds = 0.5f;
 
     [Header("Physics")]
-    public float nextWaypointDistance = 3f;
-    public float jumpNodeHeightRequirement = 0.8f;
-    public float jumpCheckOffset = 0.1f;
+    [SerializeField] private  float nextWaypointDistance = 3f;
+    [SerializeField] private  float jumpNodeHeightRequirement = 0.8f;
+    [SerializeField] private  float jumpCheckOffset = 0.1f;
 
     [Header("Custom Behavior")]
-    public bool followEnabled = true;
-    public bool jumpEnabled = true;
-    public bool directionLookEnabled = true;
-    public PlayerController playerRef = null;
+    [SerializeField] private  bool followEnabled = true;
+    [SerializeField] private  bool jumpEnabled = true;
+    [SerializeField] private  bool directionLookEnabled = true;
+    [SerializeField] private  PlayerController selfPlayerRef = null;
+    [SerializeField] private  GameObject otherPlayerGO = null;
+    [SerializeField] private  List<GameObject> sceneWeapons = new List<GameObject>();
 
     private Path path;
     private int currentWaypoint = 0;
-    RaycastHit2D isGrounded;
-    Seeker seeker;
-    Rigidbody2D rb;
+    private RaycastHit2D isGrounded;
+    private Seeker seeker;
+    private Rigidbody2D rb;
+    private PlayerController otherPlayerRef;
 
     public void Start()
     {
-        if (playerRef == null)
-            playerRef = GetComponent<PlayerController>();
+        if (selfPlayerRef == null)
+            selfPlayerRef = GetComponent<PlayerController>();
 
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-        playerRef.isAI = true;
+        selfPlayerRef.isAI = true;
+        otherPlayerRef = otherPlayerGO.GetComponent<PlayerController>();
 
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
     }
 
     private void FixedUpdate()
     {
-        if (TargetInDistance() && followEnabled)
-        {
-            PathFollow();
+        // use max dimension of current weapon to calculate range of attacks
+
+        if(selfPlayerRef.curWeapon == null){
+            int weaponsInUse = 0;
+
+            if(otherPlayerRef.curWeapon != null){
+                weaponsInUse += 1;
+            }
+
+            // there is at least one weapon available to be picked up
+            if(sceneWeapons.Count > weaponsInUse){
+                GameObject nearestWeapon = GetNearestWeapon();
+                target = nearestWeapon.transform;
+                MoveToTarget();
+            }
+            else{
+                if(otherPlayerRef.curWeapon == null){
+                    // run away
+                }
+                else{
+                    // shoving match
+                    target = otherPlayerGO.transform;
+                    MoveToTarget();
+                }
+            }
+        }
+        else{
+            target = otherPlayerGO.transform;
+            float weaponRange = GetRangeOfWeapon(selfPlayerRef.curWeapon);
+
+            // if in range, attack
+            // if not in range, move towards target
         }
     }
+
+    private GameObject GetNearestWeapon(){
+        return null;
+    }
+
+    private float GetRangeOfWeapon(WeaponController weapon){
+        return 0;
+    }   
 
     private void UpdatePath()
     {
@@ -57,7 +98,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void PathFollow()
+    private void MoveToTarget()
     {
         if (path == null)
         {
@@ -87,7 +128,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Movement
-        playerRef.MovePlayer(direction.normalized.x, jump);
+        selfPlayerRef.MovePlayer(direction.normalized.x, jump);
 
         // Next Waypoint
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
