@@ -390,6 +390,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &875503666 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1408831520035808889, guid: 115519832eb7a754892ed6feae601985,
+    type: 3}
+  m_PrefabInstance: {fileID: 1243119332}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &883646349 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1408831520035808887, guid: 115519832eb7a754892ed6feae601985,
@@ -616,13 +622,13 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 4.2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &1923886022
 CircleCollider2D:
@@ -755,8 +761,9 @@ MonoBehaviour:
   jumpEnabled: 1
   directionLookEnabled: 1
   selfPlayerRef: {fileID: 0}
-  otherPlayerRef: {fileID: 0}
+  otherPlayerGO: {fileID: 875503666}
   sceneWeapons: []
+  minDistance: 1
 --- !u!114 &1923886027
 MonoBehaviour:
   m_ObjectHideFlags: 0

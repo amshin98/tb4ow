@@ -24,6 +24,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private  PlayerController selfPlayerRef = null;
     [SerializeField] private  GameObject otherPlayerGO = null;
     [SerializeField] private  List<GameObject> sceneWeapons = new List<GameObject>();
+    [SerializeField] private float minDistance = .2f;
 
     private Path path;
     private int currentWaypoint = 0;
@@ -63,7 +64,7 @@ public class EnemyAI : MonoBehaviour
                 MoveToTarget();
             }
             else{
-                if(otherPlayerRef.curWeapon == null){
+                if(otherPlayerRef.curWeapon != null){
                     // run away
                 }
                 else{
@@ -100,7 +101,7 @@ public class EnemyAI : MonoBehaviour
 
     private void MoveToTarget()
     {
-        if (path == null)
+        if (path == null || Vector2.Distance(transform.position, target.transform.position) < minDistance)
         {
             return;
         }
