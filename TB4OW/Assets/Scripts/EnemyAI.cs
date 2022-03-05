@@ -25,6 +25,10 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private  GameObject otherPlayerGO = null;
     [SerializeField] private  List<GameObject> sceneWeapons = new List<GameObject>();
     [SerializeField] private float minDistance = .2f;
+    [SerializeField] private float rangedAttackHeightThreshold = .1f;
+    [SerializeField] private float itemPickupDistThreshold = .21f;
+    [SerializeField] private float attackRangeModifier = .1f;
+
 
     private Path path;
     private int currentWaypoint = 0;
@@ -43,6 +47,11 @@ public class EnemyAI : MonoBehaviour
         selfPlayerRef.isAI = true;
         otherPlayerRef = otherPlayerGO.GetComponent<PlayerController>();
 
+        if(itemPickupDistThreshold < minDistance)
+        {
+            Debug.LogWarning("ItemPickupDistance is less than MinMoveDistance therefore the AI will never pickup an item because it will stop moving before it gets in range to pick up said item");
+        }
+
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
     }
 
@@ -51,21 +60,27 @@ public class EnemyAI : MonoBehaviour
         // use max dimension of current weapon to calculate range of attacks
 
         if(selfPlayerRef.curWeapon == null){
-            int weaponsInUse = 0;
-
-            if(otherPlayerRef.curWeapon != null){
-                weaponsInUse += 1;
-            }
+            GameObject nearestWeapon = GetNearestWeapon();
 
             // there is at least one weapon available to be picked up
-            if(sceneWeapons.Count > weaponsInUse){
-                GameObject nearestWeapon = GetNearestWeapon();
+            if(nearestWeapon != null){
                 target = nearestWeapon.transform;
-                MoveToTarget();
+                if (Vector2.Distance(transform.position, target.transform.position) < itemPickupDistThreshold)
+                {
+                    Debug.Log("Picking up weapon");
+                    MoveToTarget();
+                    selfPlayerRef.WeaponInteract();
+                }
+                else
+                {
+                    Debug.Log(Vector2.Distance(transform.position, target.transform.position));
+                    Debug.Log("Moving to weapon");
+                    MoveToTarget();
+                }
             }
             else{
                 if(otherPlayerRef.curWeapon != null){
-                    // run away
+                    // run away (not implemented yet)
                 }
                 else{
                     // shoving match
@@ -75,21 +90,65 @@ public class EnemyAI : MonoBehaviour
             }
         }
         else{
-            target = otherPlayerGO.transform;
+            Debug.Log("ReadyForBattle");
+/*            target = otherPlayerGO.transform;
+
             float weaponRange = GetRangeOfWeapon(selfPlayerRef.curWeapon);
 
-            // if in range, attack
-            // if not in range, move towards target
+            if (selfPlayerRef.curWeapon._fireRate == RangedController.fireRate)
+            {
+                if (Mathf.Abs(otherPlayerGO.transform.position.y - transform.position.y) < rangedAttackHeightThreshold)
+                {
+                    selfPlayerRef.curWeapon.Attack();
+                }
+                else
+                {
+                    MoveToTarget();
+                }
+            }
+            else if (Vector2.Distance(transform.position, target.transform.position) < weaponRange)
+            {
+                MoveToTarget();
+                selfPlayerRef.curWeapon.Attack();
+            }
+            else
+            {
+                MoveToTarget();
+            }*/
+            target = otherPlayerGO.transform;
+            MoveToTarget();
+    
         }
     }
 
-    private GameObject GetNearestWeapon(){
-        return null;
-    }
 
     private float GetRangeOfWeapon(WeaponController weapon){
-        return 0;
-    }   
+        Vector2 size = weapon.spriteRendererRef.size;
+        return size.magnitude + attackRangeModifier;
+    }
+
+    private GameObject GetNearestWeapon() {
+
+        GameObject nearestWeapon = null;
+
+        // get all weapons in scene
+        GameObject[] sceneWeapons = GameObject.FindGameObjectsWithTag("weapon");
+        float minDist = float.MaxValue;
+
+        // iterate through each one
+        foreach (GameObject weapon in sceneWeapons)
+        {
+            // calculate the distance to it
+            if(Vector2.Distance(weapon.transform.position, transform.position) < minDist)
+            {
+                // if the player is not holding said weapon
+                if(weapon.GetComponent<WeaponController>() != otherPlayerRef.curWeapon)
+                    nearestWeapon = weapon;
+            }
+        }
+        return nearestWeapon; 
+    }
+
 
     private void UpdatePath()
     {
@@ -101,7 +160,7 @@ public class EnemyAI : MonoBehaviour
 
     private void MoveToTarget()
     {
-        if (path == null || Vector2.Distance(transform.position, target.transform.position) < minDistance)
+        if (path == null || Vector2.Distance(transform.position, target.transform.position) < minDistance)// || target == null)
         {
             return;
         }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2682778548418724821}
   m_Layer: 8
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRendererRef: {fileID: 5152585664494354949}
+  _fireRate: 1
   projectile: {fileID: 7986960856216423950, guid: 6decd159d654b1d4d858edb6b909be1c,
     type: 3}
 --- !u!61 &2682778548418724821

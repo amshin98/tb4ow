@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3345923385311435356}
   m_Layer: 8
   m_Name: Hammer
-  m_TagString: Untagged
+  m_TagString: weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRendererRef: {fileID: 267767507653282476}
+  _fireRate: 0.6
 --- !u!61 &3345923385311435356
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@
 public abstract class WeaponController : MonoBehaviour
 {
     public SpriteRenderer spriteRendererRef;
-    private float _fireRate;
+    public float _fireRate;
     private float _nextFire;
 
     private Vector3 _equipPos;
