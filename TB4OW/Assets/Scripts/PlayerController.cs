@@ -1,4 +1,5 @@
-
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 14; 
     public ProjectileBehavior ProjectilePrefab;
     public Transform launchPoint;
+    
+    public float knockbackForce;
 
     private Rigidbody2D _rigidbody;
 
@@ -27,8 +30,6 @@ public class PlayerController : MonoBehaviour
         _collider = GetComponent<Collider2D>();
         healthBar.setMaxHealth(maxHealth);
         curHealth = maxHealth; 
-        Debug.Log(curHealth);
-        Debug.Log(maxHealth);
     }
 
     // Update is called once per frame
@@ -38,6 +39,9 @@ public class PlayerController : MonoBehaviour
        // Debug.Log(curHealth);
         var movement = Input.GetAxisRaw("Horizontal");
         transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
+
+
+
 
         // Movement
         if(!Mathf.Approximately(0, movement)){
@@ -106,4 +110,16 @@ public class PlayerController : MonoBehaviour
             curHealth -= value;
             healthBar.setSliderHealth(curHealth);
     }
+
+private void OnTriggerEnter2D(Collider2D other)
+{
+    if(other.tag == "Enemy")
+    {
+        Vector2 difference = (transform.position - other.transform.position).normalized;
+        Vector2 force = difference * knockbackForce;
+        _rigidbody.AddForce(force, ForceMode2D.Impulse);
+       
+    }
+}
+
 }
