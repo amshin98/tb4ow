@@ -9,8 +9,11 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 14; 
     public ProjectileBehavior ProjectilePrefab;
     public Transform launchPoint;
-    
+    private float speed = 10.0f;
+
     public float knockbackForce;
+    private bool canMove;
+    private Vector2 knockBackPosition;
 
     private Rigidbody2D _rigidbody;
 
@@ -30,6 +33,7 @@ public class PlayerController : MonoBehaviour
         _collider = GetComponent<Collider2D>();
         healthBar.setMaxHealth(maxHealth);
         curHealth = maxHealth; 
+        canMove = true;
     }
 
     // Update is called once per frame
@@ -37,6 +41,7 @@ public class PlayerController : MonoBehaviour
     {
 
        // Debug.Log(curHealth);
+       if(canMove){
         var movement = Input.GetAxisRaw("Horizontal");
         transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
 
@@ -104,6 +109,16 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+       }
+       else{//knockback
+       Debug.Log("HERE");
+         float step = speed * Time.deltaTime;
+         transform.position = Vector2.MoveTowards(transform.position, knockBackPosition, step);
+          if (Vector2.Distance(transform.position, knockBackPosition) < 0.001f)
+        {
+            canMove = true;
+       }
+    }
     }
 
         public void damage(int value){
@@ -115,10 +130,10 @@ private void OnTriggerEnter2D(Collider2D other)
 {
     if(other.tag == "Enemy")
     {
+        canMove = false;
         Vector2 difference = (transform.position - other.transform.position).normalized;
         Vector2 force = difference * knockbackForce;
-        _rigidbody.AddForce(force, ForceMode2D.Impulse);
-       
+        knockBackPosition = ((Vector2)transform.position) + force;
     }
 }
 
