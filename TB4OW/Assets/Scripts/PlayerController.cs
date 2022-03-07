@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
             if (weaponsInRange.Length > 0)
             {
 
-                // Find closest weapon
+/*                // Find closest weapon
                 int minDistIdx = 0;
                 float minDist = _collider.Distance(weaponsInRange[0]).distance;
 
@@ -95,10 +95,11 @@ public class PlayerController : MonoBehaviour
                         minDistIdx = i;
                         minDist = curDist;
                     }
-                }
+                }*/
 
                 // Pick up, equip, and active weapon
-                curWeapon = weaponsInRange[minDistIdx].gameObject.GetComponent<WeaponController>();
+                curWeapon = weaponsInRange[0].gameObject.GetComponent<WeaponController>();
+                Debug.Log(curWeapon);
                 curWeapon.transform.parent = gameObject.transform;
                 curWeapon.Equip();
                 curWeapon.ToggleEquipped();
