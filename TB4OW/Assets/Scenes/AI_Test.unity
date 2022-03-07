@@ -767,6 +767,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun
       objectReference: {fileID: 0}
+    - target: {fileID: 5152585664494354947, guid: 00f69673eafeef049914df6018dc6a8c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5152585664494354948, guid: 00f69673eafeef049914df6018dc6a8c,
         type: 3}
       propertyPath: m_RootOrder
@@ -845,18 +850,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1812341131}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1898462219 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5152585664494354950, guid: 00f69673eafeef049914df6018dc6a8c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1812341131}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04bf1919731209e4597b935b0853faa2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1923886020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,7 +1021,7 @@ MonoBehaviour:
   nextWaypointDistance: 3
   jumpNodeHeightRequirement: 0.8
   jumpCheckOffset: 0.07
-  followEnabled: 0
+  followEnabled: 1
   jumpEnabled: 1
   directionLookEnabled: 1
   selfPlayerRef: {fileID: 0}
@@ -1036,7 +1029,7 @@ MonoBehaviour:
   sceneWeapons: []
   minDistance: 1
   rangedAttackHeightThreshold: 0.1
-  itemPickupDistThreshold: 0.21
+  itemPickupDistThreshold: 1.5
   attackRangeModifier: 0.1
 --- !u!114 &1923886027
 MonoBehaviour:
@@ -1055,7 +1048,7 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 7986960856216423950, guid: 6decd159d654b1d4d858edb6b909be1c,
     type: 3}
   launchPoint: {fileID: 1202587557}
-  curWeapon: {fileID: 1898462219}
+  curWeapon: {fileID: 0}
   pickupRange: 10
   isAI: 1
 --- !u!1 &2105368941
