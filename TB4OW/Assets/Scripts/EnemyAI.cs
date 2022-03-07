@@ -91,9 +91,11 @@ public class EnemyAI : MonoBehaviour
         }
         else{
             Debug.Log("ReadyForBattle");
-/*            target = otherPlayerGO.transform;
+            target = otherPlayerGO.transform;
 
             float weaponRange = GetRangeOfWeapon(selfPlayerRef.curWeapon);
+            Debug.Log(weaponRange);
+                Debug.Log(Vector2.Distance(transform.position, target.transform.position));
 
             if (selfPlayerRef.curWeapon._fireRate == RangedController.fireRate)
             {
@@ -108,22 +110,23 @@ public class EnemyAI : MonoBehaviour
             }
             else if (Vector2.Distance(transform.position, target.transform.position) < weaponRange)
             {
+                
                 MoveToTarget();
                 selfPlayerRef.curWeapon.Attack();
             }
             else
             {
                 MoveToTarget();
-            }*/
-            target = otherPlayerGO.transform;
-            MoveToTarget();
+            }
+/*            target = otherPlayerGO.transform;
+            MoveToTarget();*/
     
         }
     }
 
 
     private float GetRangeOfWeapon(WeaponController weapon){
-        Vector2 size = weapon.spriteRendererRef.size;
+        Vector2 size = weapon.spriteRendererRef.bounds.size;
         return size.magnitude + attackRangeModifier;
     }
 
