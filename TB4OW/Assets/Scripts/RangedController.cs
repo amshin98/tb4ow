@@ -21,6 +21,7 @@ public class RangedController : WeaponController
 
     override public void UseWeapon()
     {
+        Debug.Log("here");
         // Shoot projectile
         Instantiate(projectile,
             transform.position + new Vector3(X_OFFSET, Y_OFFSET, 0), transform.rotation);

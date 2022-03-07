@@ -90,17 +90,18 @@ public class EnemyAI : MonoBehaviour
             }
         }
         else{
-            Debug.Log("ReadyForBattle");
             target = otherPlayerGO.transform;
 
             float weaponRange = GetRangeOfWeapon(selfPlayerRef.curWeapon);
-            Debug.Log(weaponRange);
-                Debug.Log(Vector2.Distance(transform.position, target.transform.position));
 
             if (selfPlayerRef.curWeapon._fireRate == RangedController.fireRate)
             {
                 if (Mathf.Abs(otherPlayerGO.transform.position.y - transform.position.y) < rangedAttackHeightThreshold)
                 {
+                    Debug.Log("Fire");
+                    //RangedController tmp = (RangedController)selfPlayerRef.curWeapon;
+
+                    //tmp.UseWeapon();
                     selfPlayerRef.curWeapon.Attack();
                 }
                 else
@@ -110,7 +111,6 @@ public class EnemyAI : MonoBehaviour
             }
             else if (Vector2.Distance(transform.position, target.transform.position) < weaponRange)
             {
-                
                 MoveToTarget();
                 selfPlayerRef.curWeapon.Attack();
             }
