@@ -351,7 +351,7 @@ PrefabInstance:
     - target: {fileID: 1408831520035808889, guid: 115519832eb7a754892ed6feae601985,
         type: 3}
       propertyPath: m_Name
-      value: Player (1)
+      value: Placeholder
       objectReference: {fileID: 0}
     - target: {fileID: 1408831520035808889, guid: 115519832eb7a754892ed6feae601985,
         type: 3}
