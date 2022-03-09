@@ -36,6 +36,7 @@ public abstract class WeaponController : MonoBehaviour
     {
         _equipped = equipped;
         this.audioManager.Play(pickupSound);
+        GetComponent<Collider>().enabled = !equipped;
     }
 
     public bool GetEquipped()

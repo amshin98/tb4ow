@@ -2,6 +2,8 @@
 
 public class MeleeController : WeaponController
 {
+    public Collider2D collider;
+
     enum SwingStatus
     {
         IDLE,
@@ -22,6 +24,7 @@ public class MeleeController : WeaponController
     private float _swingSpeed;
 
     private static float _returnTime = 0.08f;
+    
 
     public MeleeController(float swingSpeed, float delay, Vector3 equipPos, SpriteRenderer spriteRenderer) :
         base(swingSpeed + delay, equipPos, spriteRenderer)
@@ -48,6 +51,7 @@ public class MeleeController : WeaponController
     {
         if (_swingStatus == SwingStatus.SWINGING)
         {
+            collider.enabled = true;
             float lerpRatio = (Time.time - _swingStatusStartTime) /
                 (_swingEndTime - _returnTime - _swingStatusStartTime);
 
@@ -67,6 +71,7 @@ public class MeleeController : WeaponController
         }
         else if (_swingStatus == SwingStatus.RETURNING)
         {
+            collider.enabled = false;
             float lerpRatio = (Time.time - _swingStatusStartTime) /
                 (_swingEndTime - _swingStatusStartTime);
 
@@ -82,6 +87,9 @@ public class MeleeController : WeaponController
                 newRotation.eulerAngles = Vector3.Lerp(_endRotation, _startRotation, lerpRatio);
                 transform.localRotation = newRotation;
             }
+        }
+        else{
+            collider.enabled = false;
         }
     }
 
