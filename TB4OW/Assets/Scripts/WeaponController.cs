@@ -12,6 +12,7 @@ public abstract class WeaponController : MonoBehaviour
     private Vector3 _equipPos;
 
     private bool _equipped;
+    // protected Collider2D _collider;
 
     public WeaponController(float fireRate, Vector3 equipPos, SpriteRenderer spriteRenderer)
     {
@@ -26,6 +27,7 @@ public abstract class WeaponController : MonoBehaviour
     }
 
     public void Awake(){
+        // _collider = GetComponent<Collider2D>();
     }
 
     public void SetEquipped(bool equipped)

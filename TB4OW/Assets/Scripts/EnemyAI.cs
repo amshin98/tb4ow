@@ -5,6 +5,7 @@ using Pathfinding;
 
 // from https://www.youtube.com/watch?v=sWqRfygpl4I
 
+[RequireComponent(typeof(Seeker))]
 public class EnemyAI : MonoBehaviour
 {
     [Header("Pathfinding")]
@@ -23,7 +24,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private  bool directionLookEnabled = true;
     [SerializeField] private  PlayerController selfPlayerRef = null;
     [SerializeField] private  GameObject otherPlayerGO = null;
-    [SerializeField] private  List<GameObject> sceneWeapons = new List<GameObject>();
     [SerializeField] private float minDistance = .2f;
     [SerializeField] private float rangedAttackHeightThreshold = .1f;
     [SerializeField] private float itemPickupDistThreshold = .21f;
@@ -193,7 +193,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Movement
-        selfPlayerRef.MovePlayer(direction.normalized.x, jump);
+        selfPlayerRef.controller.Move(direction.x * Time.fixedDeltaTime * selfPlayerRef.movementSpeed, false, jump);
 
         // Next Waypoint
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
