@@ -44,7 +44,7 @@ public class MeleeController : WeaponController
     }
 
     // Actually swing the sword. UseWeapon triggers the swing
-    private void Update()
+    private void FixedUpdate()
     {
         if (_swingStatus == SwingStatus.SWINGING)
         {

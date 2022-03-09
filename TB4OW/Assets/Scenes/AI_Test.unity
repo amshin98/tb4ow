@@ -1021,7 +1021,7 @@ MonoBehaviour:
   nextWaypointDistance: 3
   jumpNodeHeightRequirement: 0.8
   jumpCheckOffset: 0.07
-  followEnabled: 1
+  followEnabled: 0
   jumpEnabled: 1
   directionLookEnabled: 1
   selfPlayerRef: {fileID: 0}

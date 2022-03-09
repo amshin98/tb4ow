@@ -13,8 +13,6 @@ public abstract class WeaponController : MonoBehaviour
 
     private bool _equipped;
 
-    private AudioManager audioManager = new AudioManager();
-
     public WeaponController(float fireRate, Vector3 equipPos, SpriteRenderer spriteRenderer)
     {
         this.spriteRendererRef = spriteRenderer;
@@ -28,13 +26,11 @@ public abstract class WeaponController : MonoBehaviour
     }
 
     public void Awake(){
-        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public void SetEquipped(bool equipped)
     {
         _equipped = equipped;
-        this.audioManager.Play(pickupSound);
     }
 
     public bool GetEquipped()
@@ -50,7 +46,6 @@ public abstract class WeaponController : MonoBehaviour
     {
         if (_equipped)
         {
-            this.audioManager.Play(hitSound);
 
             string curTag = collider.gameObject.tag;
 
@@ -81,7 +76,6 @@ public abstract class WeaponController : MonoBehaviour
         {
             _nextFire = Time.time + _fireRate;
             UseWeapon();
-            this.audioManager.Play(attackSound);
         }
     }
 

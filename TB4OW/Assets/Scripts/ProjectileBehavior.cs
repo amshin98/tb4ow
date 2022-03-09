@@ -20,7 +20,7 @@ public class ProjectileBehavior : WeaponController
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 moveVec = transform.right;
         moveVec.z = 0;

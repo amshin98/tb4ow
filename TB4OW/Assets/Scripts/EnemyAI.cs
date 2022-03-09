@@ -67,14 +67,14 @@ public class EnemyAI : MonoBehaviour
                 target = nearestWeapon.transform;
                 if (Vector2.Distance(transform.position, target.transform.position) < itemPickupDistThreshold)
                 {
-                    Debug.Log("Picking up weapon");
+                    //Debug.Log("Picking up weapon");
                     MoveToTarget();
                     selfPlayerRef.WeaponInteract();
                 }
                 else
                 {
                     // Debug.Log(Vector2.Distance(transform.position, target.transform.position));
-                    Debug.Log("Moving to weapon");
+                    //Debug.Log("Moving to weapon");
                     MoveToTarget();
                 }
             }
@@ -98,7 +98,7 @@ public class EnemyAI : MonoBehaviour
             {
                 if (Mathf.Abs(otherPlayerGO.transform.position.y - transform.position.y) < rangedAttackHeightThreshold)
                 {
-                    Debug.Log("Fire");
+                    //Debug.Log("Fire");
                     //RangedController tmp = (RangedController)selfPlayerRef.curWeapon;
 
                     //tmp.UseWeapon();
@@ -111,13 +111,13 @@ public class EnemyAI : MonoBehaviour
             }
             else if (Vector2.Distance(transform.position, target.transform.position) < weaponRange)
             {
-                Debug.Log("Attack Player");
+                //Debug.Log("Attack Player");
                 MoveToTarget();
                 selfPlayerRef.curWeapon.Attack();
             }
             else
             {
-                Debug.Log("Move To Player");
+                //Debug.Log("Move To Player");
                 MoveToTarget();
             }
 /*            target = otherPlayerGO.transform;
