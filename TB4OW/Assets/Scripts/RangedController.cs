@@ -2,13 +2,14 @@
 
 public class RangedController : WeaponController
 {
-    private const float X_OFFSET = 0f;
-    private const float Y_OFFSET = -0.3f;
+    private const float X_OFFSET_R = 0.5f;
+    private const float X_OFFSET_L = -0.5f;
+    private const float Y_OFFSET = 0.0f;
 
     public ProjectileBehavior projectile;
     public static float fireRate = 1f;
 
-    public static Vector3 equipPos = new Vector3(0.192f, 0.002f, 0);
+    public static Vector3 equipPos = new Vector3(1f, 0.002f, 0);
 
     RangedController() : base(fireRate, equipPos) { }
 
@@ -20,7 +21,9 @@ public class RangedController : WeaponController
     override public void UseWeapon()
     {
         // Shoot projectile
+        //TODO FIX THE FISH DIRECTION
+        var xOffset = transform.parent.rotation.y == 0 ? X_OFFSET_R : X_OFFSET_L;
         Instantiate(projectile,
-            transform.position + new Vector3(X_OFFSET, Y_OFFSET, 0), transform.rotation);
+            transform.position + new Vector3(xOffset, Y_OFFSET, 0), transform.rotation);
     }
 }

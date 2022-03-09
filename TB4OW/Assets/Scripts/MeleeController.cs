@@ -40,7 +40,9 @@ public class MeleeController : WeaponController
         _startRotation = new Vector3(0, 0, 0);
         _endRotation = new Vector3(0, 0, -140);
 
-        _endPosition = _startPosition + new Vector3(0.12f, -0.35f, 0);
+        _endPosition = _startPosition + new Vector3(0.8f, -1.5f, 0);
+
+        //_endPosition = _startPosition + new Vector3(0.12f, -0.35f, 0);
     }
 
     // Actually swing the sword. UseWeapon triggers the swing
