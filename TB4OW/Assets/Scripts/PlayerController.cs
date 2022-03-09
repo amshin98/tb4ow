@@ -52,7 +52,7 @@ public class PlayerController: MonoBehaviour {
   }
 
   public void MovePlayer(float playerInput, bool jump) {
-    if (canMove) {
+    // if (canMove) {
       transform.position += movementSpeed * Time.deltaTime * new Vector3(playerInput, 0, 0);
 
       if (!Mathf.Approximately(0, playerInput)) {
@@ -61,15 +61,15 @@ public class PlayerController: MonoBehaviour {
       if (jump && Mathf.Abs(_rigidbody.velocity.y) < 0.001f) {
         _rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
       }
-    }
-    else { //knockback
-      Debug.Log("HERE");
-      float step = knockbackSpeed * Time.deltaTime;
-      transform.position = Vector2.MoveTowards(transform.position, knockBackPosition, step);
-      if (Vector2.Distance(transform.position, knockBackPosition) < 0.001f) {
-        canMove = true;
-      }
-    }
+    // }
+    // else { //knockback
+    //   Debug.Log("HERE");
+    //   float step = knockbackSpeed * Time.deltaTime;
+    //   transform.position = Vector2.MoveTowards(transform.position, knockBackPosition, step);
+    //   if (Vector2.Distance(transform.position, knockBackPosition) < 0.001f) {
+    //     canMove = true;
+    //   }
+    // }
   }
 
   public void WeaponInteract() {
@@ -88,19 +88,6 @@ public class PlayerController: MonoBehaviour {
 
       if (weaponsInRange.Length > 0) {
 
-        /*                // Find closest weapon
-                int minDistIdx = 0;
-                float minDist = _collider.Distance(weaponsInRange[0]).distance;
-
-                for (int i = 1; i < weaponsInRange.Length; i++)
-                {
-                    float curDist = _collider.Distance(weaponsInRange[i]).distance;
-                    if (curDist < minDist)
-                    {
-                        minDistIdx = i;
-                        minDist = curDist;
-                    }
-                }*/
 
         // Pick up, equip, and active weapon
         curWeapon = weaponsInRange[0].gameObject.GetComponent < WeaponController > ();
