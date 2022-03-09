@@ -29,7 +29,6 @@ public class PC : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
-        healthBar.setMaxHealth(maxHealth);
         curHealth = maxHealth; 
         canMove = true;
     }
@@ -117,7 +116,6 @@ public class PC : MonoBehaviour
 
         public void damage(int value){
             curHealth -= value;
-            healthBar.setSliderHealth(curHealth);
     }
 
 private void OnTriggerEnter2D(Collider2D other)
