@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - projectile
   - destructable
+  - weapon
   - Enemy
   layers:
   - Default
@@ -41,12 +41,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 46433263
-    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Foreground
-    uniqueID: 1974613693
     locked: 0

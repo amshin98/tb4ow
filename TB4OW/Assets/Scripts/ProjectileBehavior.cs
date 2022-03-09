@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ProjectileBehavior : WeaponController
 {
-
     public static float Speed = 15f;
     public static float _lifetime = 5f;
 
-    ProjectileBehavior() : base(0, new Vector3())
+
+    ProjectileBehavior() : base(0, new Vector3(), null)
     {
         base.SetEquipped(true);
     }

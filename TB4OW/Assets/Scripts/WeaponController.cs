@@ -2,7 +2,8 @@
 
 public abstract class WeaponController : MonoBehaviour
 {
-    private float _fireRate;
+    public SpriteRenderer spriteRendererRef;
+    public float _fireRate;
     private float _nextFire;
 
     private Vector3 _equipPos;
@@ -10,8 +11,10 @@ public abstract class WeaponController : MonoBehaviour
     private bool _equipped;
 
 
-    public WeaponController(float fireRate, Vector3 equipPos)
+    public WeaponController(float fireRate, Vector3 equipPos, SpriteRenderer spriteRenderer)
     {
+        this.spriteRendererRef = spriteRenderer;
+
         _fireRate = fireRate;
         _nextFire = 0.0f;
 
