@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MvtProjPlaytest.unity
     guid: f0ff4a58738e0df429e68260fb1f1e6c
+  - enabled: 1
+    path: Assets/Scenes/AI_Test.unity
+    guid: 4c7b033f16d51664088b6dd97664df11
   m_configObjects: {}
