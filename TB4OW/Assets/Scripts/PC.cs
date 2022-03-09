@@ -6,7 +6,7 @@ public class PC : MonoBehaviour
 {
     // With 4.2 gravity scale
     public float MovementSpeed = 12;
-    public float jumpForce = 14; 
+    public float jumpForce = 14;
     public ProjectileBehavior ProjectilePrefab;
     public Transform launchPoint;
     private float speed = 10.0f;
@@ -29,7 +29,7 @@ public class PC : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
-        curHealth = maxHealth; 
+        curHealth = maxHealth;
         canMove = true;
     }
 
@@ -37,96 +37,100 @@ public class PC : MonoBehaviour
     void Update()
     {
 
-       // Debug.Log(curHealth);
-       if(canMove){
-        var movement = Input.GetAxisRaw("Horizontal");
-        transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
+        // Debug.Log(curHealth);
+        if (canMove)
+        {
+            var movement = Input.GetAxisRaw("Horizontal");
+            transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
 
-        // Movement
-        if(!Mathf.Approximately(0, movement)){
-            transform.rotation = movement < 0 ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
-        }
-        if(Input.GetButtonDown("Jump") && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
-        {
-            _rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-            damage(20);
-            
-        }
-        
-        // Attacking
-        if(Input.GetButtonDown("Fire1") && curWeapon != null)
-        {
-            curWeapon.Attack();
-            
-        }
-
-        // TODO: pickup
-        if(Input.GetButtonDown("Fire2"))
-        {
-            if(curWeapon != null)
+            // Movement
+            if (!Mathf.Approximately(0, movement))
             {
-                // Drop weapon
-                curWeapon.transform.parent = null;
-                curWeapon = null;
-                Debug.Log("dropp");
+                transform.rotation = movement < 0 ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
             }
-            else
+            if (Input.GetButtonDown("Jump") && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
             {
-                // Check for weapon pickup
-                LayerMask weaponLayerMask = LayerMask.GetMask("Weapons");
+                _rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+                damage(20);
 
-                Collider2D[] weaponsInRange = Physics2D.OverlapCircleAll(
-                    transform.position, pickupRange, weaponLayerMask);
+            }
 
-                if (weaponsInRange.Length > 0)
+            // Attacking
+            if (Input.GetButtonDown("Fire1") && curWeapon != null)
+            {
+                curWeapon.Attack();
+
+            }
+
+            // TODO: pickup
+            if (Input.GetButtonDown("Fire2"))
+            {
+                if (curWeapon != null)
                 {
+                    // Drop weapon
+                    curWeapon.transform.parent = null;
+                    curWeapon = null;
+                    Debug.Log("dropp");
+                }
+                else
+                {
+                    // Check for weapon pickup
+                    LayerMask weaponLayerMask = LayerMask.GetMask("Weapons");
 
-                    // Find closest weapon
-                    int minDistIdx = 0;
-                    float minDist = _collider.Distance(weaponsInRange[0]).distance;
+                    Collider2D[] weaponsInRange = Physics2D.OverlapCircleAll(
+                        transform.position, pickupRange, weaponLayerMask);
 
-                    for (int i = 1; i < weaponsInRange.Length; i ++)
+                    if (weaponsInRange.Length > 0)
                     {
-                        float curDist = _collider.Distance(weaponsInRange[i]).distance;
-                        if (curDist < minDist)
-                        {
-                            minDistIdx = i;
-                            minDist = curDist;
-                        }
-                    }
 
-                    // Pick up, equip, and active weapon
-                    curWeapon = weaponsInRange[minDistIdx].gameObject.GetComponent<WeaponController>();
-                    curWeapon.transform.parent = gameObject.transform;
-                    curWeapon.Equip();
-                    curWeapon.ToggleEquipped();
+                        // Find closest weapon
+                        int minDistIdx = 0;
+                        float minDist = _collider.Distance(weaponsInRange[0]).distance;
+
+                        for (int i = 1; i < weaponsInRange.Length; i++)
+                        {
+                            float curDist = _collider.Distance(weaponsInRange[i]).distance;
+                            if (curDist < minDist)
+                            {
+                                minDistIdx = i;
+                                minDist = curDist;
+                            }
+                        }
+
+                        // Pick up, equip, and active weapon
+                        curWeapon = weaponsInRange[minDistIdx].gameObject.GetComponent<WeaponController>();
+                        curWeapon.transform.parent = gameObject.transform;
+                        curWeapon.Equip();
+                        curWeapon.ToggleEquipped();
+                    }
                 }
             }
         }
-       }
-       else{//knockback
-         float step = speed * Time.deltaTime;
-         transform.position = Vector2.MoveTowards(transform.position, knockBackPosition, step);
-         if (Vector2.Distance(transform.position, knockBackPosition) < 0.001f)
-          {
-            canMove = true;
-          }
-    }
-    }
-
-        public void damage(int value){
-            curHealth -= value;
+        else
+        {//knockback
+            float step = speed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, knockBackPosition, step);
+            if (Vector2.Distance(transform.position, knockBackPosition) < 0.001f)
+            {
+                canMove = true;
+            }
+        }
     }
 
-private void OnTriggerEnter2D(Collider2D other)
-{
-    if(other.tag == "Enemy")
+    public void damage(int value)
     {
-        canMove = false;
-        Vector2 difference = (transform.position - other.transform.position).normalized;
-        Vector2 force = difference * knockbackForce;
-        knockBackPosition = ((Vector2)transform.position) + force;
+        curHealth -= value;
     }
-}
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Enemy")
+        {
+            canMove = false;
+            Vector2 difference = (transform.position - other.transform.position).normalized;
+            Vector2 force = difference * knockbackForce;
+            knockBackPosition = ((Vector2)transform.position) + force;
+        }
+    }
 
 }

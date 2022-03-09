@@ -27,7 +27,8 @@ public abstract class WeaponController : MonoBehaviour
         _equipped = false;
     }
 
-    public void Awake(){
+    public void Awake()
+    {
         audioManager = FindObjectOfType<AudioManager>();
     }
 
