@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public float knockbackForce = 5f;
     public float knockbackSpeed = 10f;
-    private bool canMove;
+    private bool canMove = true;
     private Vector2 knockBackPosition;
 
     private Rigidbody2D _rigidbody;
@@ -36,30 +36,40 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!isAI)
-        {
-            var playerInput = Input.GetAxisRaw("Horizontal");
-
-            // Movement
-            MovePlayer(playerInput, Input.GetButtonDown("Jump"));
-
-            // Attacking
-            if (Input.GetButtonDown("Fire1") && curWeapon != null)
+        if (canMove){
+            if (!isAI)
             {
-                curWeapon.Attack();
+
+                var playerInput = Input.GetAxisRaw("Horizontal");
+
+                // Movement
+                MovePlayer(playerInput, Input.GetButtonDown("Jump"));
+
+                // Attacking
+                if (Input.GetButtonDown("Fire1") && curWeapon != null)
+                {
+                    curWeapon.Attack();
+                }
+
+                // TODO: pickup
+                if (Input.GetButtonDown("Fire2"))
+                {
+                    WeaponInteract();
+                }
             }
-
-            // TODO: pickup
-            if (Input.GetButtonDown("Fire2"))
-            {
-                WeaponInteract();
+        }
+        else { //knockback
+            Debug.Log("HERE");
+            float step = knockbackSpeed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, knockBackPosition, step);
+            if (Mathf.Abs(transform.position.x - knockBackPosition.x) < 0.1f) {
+                canMove = true;
             }
         }
     }
 
     public void MovePlayer(float playerInput, bool jump)
     {
-        // if (canMove) {
         transform.position += movementSpeed * Time.deltaTime * new Vector3(playerInput, 0, 0);
 
         if (!Mathf.Approximately(0, playerInput))
@@ -70,15 +80,7 @@ public class PlayerController : MonoBehaviour
         {
             _rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
-        // }
-        // else { //knockback
-        //   Debug.Log("HERE");
-        //   float step = knockbackSpeed * Time.deltaTime;
-        //   transform.position = Vector2.MoveTowards(transform.position, knockBackPosition, step);
-        //   if (Vector2.Distance(transform.position, knockBackPosition) < 0.001f) {
-        //     canMove = true;
-        //   }
-        // }
+
     }
 
     public void WeaponInteract()
@@ -119,8 +121,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "weapon")
         {
+            Debug.Log("colliding");
             canMove = false;
             Vector2 difference = (transform.position - other.transform.position).normalized;
             Vector2 force = difference * knockbackForce;

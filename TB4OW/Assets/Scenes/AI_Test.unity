@@ -403,24 +403,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875503666}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4d62334610afef4d9d5caed11014114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 12
+  MovementSpeed: 12
   jumpForce: 14
   ProjectilePrefab: {fileID: 7986960856216423950, guid: 6decd159d654b1d4d858edb6b909be1c,
     type: 3}
   launchPoint: {fileID: 1243119333}
   knockbackForce: 5
-  knockbackSpeed: 10
   curWeapon: {fileID: 0}
   pickupRange: 10
   curHealth: 100
   maxHealth: 100
-  healthBar: {fileID: 0}
-  isAI: 0
 --- !u!4 &883646349 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1408831520035808887, guid: 115519832eb7a754892ed6feae601985,
@@ -551,7 +548,7 @@ PrefabInstance:
     - target: {fileID: 1408831520035808882, guid: 115519832eb7a754892ed6feae601985,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1408831520035808887, guid: 115519832eb7a754892ed6feae601985,
         type: 3}
@@ -675,7 +672,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 46433263
-  m_SortingLayer: -1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 64bc51c91cffcdb47aa7fffddf8a8411, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -902,7 +899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1923886021
 Rigidbody2D:
   serializedVersion: 4
@@ -1069,7 +1066,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923886020}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ab1e84e2a602454ca7dbdc5365bee43, type: 3}
   m_Name: 
