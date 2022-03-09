@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator animator;
+
     // With 4.2 gravity scale
     public float MovementSpeed = 12;
     public float jumpForce = 14; 
@@ -28,6 +30,11 @@ public class PlayerController : MonoBehaviour
     {
         var movement = Input.GetAxisRaw("Horizontal");
         transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
+        if (movement != 0) {
+            animator.SetFloat("Speed", 1);
+        } else {
+            animator.SetFloat("Speed", 0);
+        }
 
         // Movement
         if(!Mathf.Approximately(0, movement)){

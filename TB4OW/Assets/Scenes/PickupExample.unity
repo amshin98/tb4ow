@@ -535,6 +535,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1408831520035808882, guid: 115519832eb7a754892ed6feae601985,
         type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1243119334}
+    - target: {fileID: 1408831520035808882, guid: 115519832eb7a754892ed6feae601985,
+        type: 3}
       propertyPath: curWeapon
       value: 
       objectReference: {fileID: 0}
