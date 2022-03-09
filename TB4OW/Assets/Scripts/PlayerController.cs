@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class PlayerController: MonoBehaviour {
   // With 4.2 gravity scale
-  public float MovementSpeed = 12;
-  public float jumpForce = 14;
+  public float movementSpeed = 12f;
+  public float jumpForce = 14f;
   public ProjectileBehavior ProjectilePrefab;
   public Transform launchPoint;
 
-  public float knockbackForce;
+  public float knockbackForce = 5f;
+  public float knockbackSpeed = 10f;
   private bool canMove;
   private Vector2 knockBackPosition;
 
@@ -18,8 +19,8 @@ public class PlayerController: MonoBehaviour {
   public float pickupRange = 10f;
   private Collider2D _collider;
 
-  public int curHealth;
-  public int maxHealth;
+  public int curHealth = 100;
+  public int maxHealth = 100;
   public HealthBar healthBar;
 
   public bool isAI = false;
@@ -52,7 +53,7 @@ public class PlayerController: MonoBehaviour {
 
   public void MovePlayer(float playerInput, bool jump) {
     if (canMove) {
-      transform.position += MovementSpeed * Time.deltaTime * new Vector3(playerInput, 0, 0);
+      transform.position += movementSpeed * Time.deltaTime * new Vector3(playerInput, 0, 0);
 
       if (!Mathf.Approximately(0, playerInput)) {
         transform.rotation = playerInput < 0 ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
@@ -63,7 +64,7 @@ public class PlayerController: MonoBehaviour {
     }
     else { //knockback
       Debug.Log("HERE");
-      float step = speed * Time.deltaTime;
+      float step = knockbackSpeed * Time.deltaTime;
       transform.position = Vector2.MoveTowards(transform.position, knockBackPosition, step);
       if (Vector2.Distance(transform.position, knockBackPosition) < 0.001f) {
         canMove = true;
