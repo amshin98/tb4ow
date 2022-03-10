@@ -10,6 +10,7 @@ public abstract class WeaponController : MonoBehaviour
     [Header("References")]
     public string label;
     public SpriteRenderer spriteRendererRef;
+    public AudioManager audioManager = null;
 
     [Header("Behaviors")]
     [SerializeField] private float _fireRate;
@@ -38,11 +39,16 @@ public abstract class WeaponController : MonoBehaviour
 
     public void Awake(){
         // _collider = GetComponent<Collider2D>();
+        if (audioManager == null){
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 
     public void SetEquipped(bool equipped)
     {
         _equipped = equipped;
+        // if(_equipped){
+        // }
     }
 
     public bool GetEquipped()
@@ -74,6 +80,8 @@ public abstract class WeaponController : MonoBehaviour
             }
 
             otherPC.curPercent = playerPercent;
+
+            audioManager.Play(hitSound);
         }
     }
 
@@ -95,6 +103,7 @@ public abstract class WeaponController : MonoBehaviour
         if (Time.time > _nextFire)
         {
             _nextFire = Time.time + _fireRate;
+            audioManager.Play(attackSound);
             UseWeapon();
         }
     }
@@ -103,6 +112,8 @@ public abstract class WeaponController : MonoBehaviour
     public void Equip()
     {
         gameObject.transform.localPosition = _equipPos;
+        audioManager.Play(pickupSound);
+
     }
 
 

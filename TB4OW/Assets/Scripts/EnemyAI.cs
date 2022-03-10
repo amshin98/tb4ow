@@ -16,7 +16,6 @@ public class EnemyAI : MonoBehaviour
     [Header("Physics")]
     [SerializeField] private  float nextWaypointDistance = 3f;
     [SerializeField] private  float jumpNodeHeightRequirement = 0.8f;
-    [SerializeField] private  float jumpCheckOffset = 0.1f;
 
     [Header("Custom Behavior")]
     [SerializeField] private  bool followEnabled = true;
