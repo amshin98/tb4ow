@@ -39,7 +39,9 @@ public class PlayerController : MonoBehaviour
 		jump = Input.GetButton("Jump");
         attack = Input.GetKey(KeyCode.J);
         interact = Input.GetKey(KeyCode.K);
-    }
+		if(curWeapon != null)
+			curWeapon.isFacingRight = controller.m_FacingRight;
+	}
 
 	void FixedUpdate()
 	{
@@ -83,7 +85,6 @@ public class PlayerController : MonoBehaviour
 
 				// Pick up, equip, and active weapon
 				curWeapon = weaponsInRange[0].gameObject.GetComponent<WeaponController>();
-				Debug.Log(curWeapon);
 				curWeapon.transform.parent = gameObject.transform;
 				curWeapon.Equip();
 				curWeapon.ToggleEquipped();

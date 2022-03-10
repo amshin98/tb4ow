@@ -2,27 +2,37 @@
 
 public abstract class WeaponController : MonoBehaviour
 {
-    public string pickupSound;
-    public string attackSound;
-    public string hitSound;
+    [Header("Sounds")]
+    [SerializeField] private string pickupSound;
+    [SerializeField] private string attackSound;
+    [SerializeField] private string hitSound;
+
+    [Header("References")]
+    public string label;
     public SpriteRenderer spriteRendererRef;
-    public float _fireRate;
+
+    [Header("Behaviors")]
+    [SerializeField] private float _fireRate;
+    public bool isFacingRight;
+    [SerializeField] protected bool attacking = false;
+    [SerializeField] private bool _equipped;
+
+
+
+
     private float _nextFire;
-
     private Vector3 _equipPos;
+    protected Vector2 launchVector;
+    protected float percentDamage = 10f;
 
-    private bool _equipped;
-    // protected Collider2D _collider;
-
-    public WeaponController(float fireRate, Vector3 equipPos, SpriteRenderer spriteRenderer)
+    public WeaponController(float fireRate, Vector3 equipPos, SpriteRenderer spriteRenderer, string label)
     {
         this.spriteRendererRef = spriteRenderer;
+        this.label = label;
 
         _fireRate = fireRate;
         _nextFire = 0.0f;
-
         _equipPos = equipPos;
-
         _equipped = false;
     }
 
@@ -42,26 +52,34 @@ public abstract class WeaponController : MonoBehaviour
 
     public abstract void ToggleEquipped();
 
-    // Handles dealing damage/knockback. For now, destroy targets but in
-    // future change to knock back player
-    public void OnTriggerEnter2D(Collider2D collider)
+    // Handles dealing damage/knockback
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (_equipped)
+        if (_equipped && attacking && other.CompareTag("Player"))
         {
+            PlayerController otherPC = other.GetComponent<PlayerController>();
+            float playerPercent = otherPC.curPercent;
+            Rigidbody2D otherRigidbody = other.GetComponent<Rigidbody2D>();
+            playerPercent += percentDamage;
 
-            string curTag = collider.gameObject.tag;
+            Vector2 scaledKnockback = launchVector * GetLaunchScale(playerPercent);
+            Debug.Log(scaledKnockback);
+            if (isFacingRight)
+            {
+                otherRigidbody.AddForce(scaledKnockback);
+            }
+            else
+            {
+                otherRigidbody.AddForce(new Vector2(scaledKnockback.x * -1, scaledKnockback.y));
+            }
 
-            Debug.Log(curTag);
-            if (curTag == "destructable")
-            {
-                Destroy(collider.gameObject);
-            }
-            else if (curTag == "player")
-            {
-                Debug.Log("KNOCKBACK");
-            }
-            AdditionalTriggerStep(collider);
+            otherPC.curPercent = playerPercent;
         }
+    }
+
+    private float GetLaunchScale(float healthPercent)
+    {
+        return .1f * (Mathf.Pow(healthPercent, 2)) + 10f;
     }
 
     // To be overridden. Additional step when OnTriggerEnter2D is invoked.

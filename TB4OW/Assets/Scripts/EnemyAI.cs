@@ -94,7 +94,7 @@ public class EnemyAI : MonoBehaviour
 
             float weaponRange = GetRangeOfWeapon(selfPlayerRef.curWeapon);
 
-            if (selfPlayerRef.curWeapon._fireRate == RangedController.fireRate)
+            if (selfPlayerRef.curWeapon.label.Equals("fish bucket"))
             {
                 if (Mathf.Abs(otherPlayerGO.transform.position.y - transform.position.y) < rangedAttackHeightThreshold)
                 {
@@ -177,17 +177,17 @@ public class EnemyAI : MonoBehaviour
         }
 
         // See if colliding with anything
-        Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
-        isGrounded = Physics2D.Raycast(startOffset, -Vector3.up, 0.05f);
+        Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y);
 
         // Direction Calculation
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         bool jump = false;
         // Jump
-        if (jumpEnabled && isGrounded)
+        if (jumpEnabled)
         {
             if (direction.y > jumpNodeHeightRequirement)
             {
+                //Debug.Log("Jump");
                 jump = true;
             }
         }
