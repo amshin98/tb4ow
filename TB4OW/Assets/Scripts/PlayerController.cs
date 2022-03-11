@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 	public ProjectileBehavior ProjectilePrefab;
     public string jumpSound;
     public string landSound;
+	public Transform aiTargetPos;
 
 	float horizontalMove = 0f;
 	bool jump = false;

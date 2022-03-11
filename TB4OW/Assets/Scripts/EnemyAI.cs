@@ -83,13 +83,13 @@ public class EnemyAI : MonoBehaviour
                 }
                 else{
                     // shoving match
-                    target = otherPlayerGO.transform;
+                    target = otherPlayerRef.aiTargetPos;
                     MoveToTarget();
                 }
             }
         }
         else{
-            target = otherPlayerGO.transform;
+            target = otherPlayerRef.aiTargetPos;
 
             float weaponRange = GetRangeOfWeapon(selfPlayerRef.curWeapon);
 
