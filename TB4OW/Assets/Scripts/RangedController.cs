@@ -12,7 +12,10 @@ public class RangedController : WeaponController
 
     public static Vector3 equipPos = new Vector3(0.192f, 0.002f, 0);
 
-    RangedController() : base(fireRate, equipPos, spriteRenderer) { }
+    RangedController() : base(fireRate, equipPos, spriteRenderer, "fish bucket") {
+        base.percentDamage = 10f;
+        base.launchVector = (new Vector2(1, 1)).normalized;
+    }
 
     public override void ToggleEquipped()
     {

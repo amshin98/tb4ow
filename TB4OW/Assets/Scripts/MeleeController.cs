@@ -22,9 +22,10 @@ public class MeleeController : WeaponController
     private float _swingSpeed;
 
     private static float _returnTime = 0.08f;
+    private Collider2D _collider;
 
-    public MeleeController(float swingSpeed, float delay, Vector3 equipPos, SpriteRenderer spriteRenderer) :
-        base(swingSpeed + delay, equipPos, spriteRenderer)
+    public MeleeController(float swingSpeed, float delay, Vector3 equipPos, SpriteRenderer spriteRenderer, string label) :
+        base(swingSpeed + delay, equipPos, spriteRenderer, label)
     {
         _swingSpeed = swingSpeed;
 
@@ -41,10 +42,11 @@ public class MeleeController : WeaponController
         _endRotation = new Vector3(0, 0, -140);
 
         _endPosition = _startPosition + new Vector3(0.12f, -0.35f, 0);
+        _collider = GetComponent<Collider2D>();
     }
 
     // Actually swing the sword. UseWeapon triggers the swing
-    private void Update()
+    private void FixedUpdate()
     {
         if (_swingStatus == SwingStatus.SWINGING)
         {
@@ -67,6 +69,7 @@ public class MeleeController : WeaponController
         }
         else if (_swingStatus == SwingStatus.RETURNING)
         {
+            base.attacking = false;
             float lerpRatio = (Time.time - _swingStatusStartTime) /
                 (_swingEndTime - _swingStatusStartTime);
 
@@ -93,6 +96,7 @@ public class MeleeController : WeaponController
     override public void UseWeapon()
     {
         _swingStatus = SwingStatus.SWINGING;
+        base.attacking = true;
         _swingStatusStartTime = Time.time;
         _swingEndTime = Time.time + _swingSpeed;
     }
