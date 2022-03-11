@@ -11,7 +11,6 @@ public class HealthPercentage : MonoBehaviour
     // Update is called once per frame
     void Start(){
     healthText.text = "0%";
-   
     }
     void Update()
     {
