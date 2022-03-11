@@ -219,6 +219,7 @@ MonoBehaviour:
     type: 3}
   jumpSound: 
   landSound: 
+  aiTargetPos: {fileID: 1493244232}
 --- !u!1 &1408831520269196074
 GameObject:
   m_ObjectHideFlags: 0

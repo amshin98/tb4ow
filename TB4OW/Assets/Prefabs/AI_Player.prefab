@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3135441304455547460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.102, y: 0, z: 0}
+  m_LocalPosition: {x: -0.099, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3135441305455237627}
@@ -179,7 +179,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.3
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 7
   m_Material: {fileID: 0}
@@ -248,8 +248,9 @@ MonoBehaviour:
   isAI: 0
   ProjectilePrefab: {fileID: 7986960856216423950, guid: 6decd159d654b1d4d858edb6b909be1c,
     type: 3}
-  jumpSound: 
-  landSound: 
+  jumpSound: Penguin-Jump
+  landSound: Penguin-Land
+  aiTargetPos: {fileID: 0}
 --- !u!114 &5960420424711496662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,7 +304,7 @@ MonoBehaviour:
   minDistance: 0.2
   rangedAttackHeightThreshold: 0.1
   itemPickupDistThreshold: 0.21
-  attackRangeModifier: 0.1
+  attackRangeModifier: 0.05
 --- !u!1 &3135441306181261082
 GameObject:
   m_ObjectHideFlags: 0

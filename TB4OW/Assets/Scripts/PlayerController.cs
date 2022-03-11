@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 	public float movementSpeed = 40f;
 
 	[Header("Weapon Interact Parameters")]
-	public float pickupRange = 10f;
+	public float pickupRange = .1f;
 
 	[Header("Player Parameters")]
 	public WeaponController curWeapon;
@@ -78,23 +78,44 @@ public class PlayerController : MonoBehaviour
 		else
 		{
 			// Check for weapon pickup
-			LayerMask weaponLayerMask = LayerMask.GetMask("Weapons");
+			GameObject nearestWeapon = GetNearestWeapon();
 
-			Collider2D[] weaponsInRange = Physics2D.OverlapCircleAll(
-			transform.position, pickupRange, weaponLayerMask);
-
-			if (weaponsInRange.Length > 0)
+			if (nearestWeapon != null)
 			{
 
 
 				// Pick up, equip, and active weapon
-				curWeapon = weaponsInRange[0].gameObject.GetComponent<WeaponController>();
+				curWeapon = nearestWeapon.GetComponent<WeaponController>();
 				curWeapon.transform.parent = gameObject.transform;
 				curWeapon.Equip();
 				curWeapon.ToggleEquipped();
 			}
 		}
 	}
+
+	private GameObject GetNearestWeapon() {
+
+        GameObject nearestWeapon = null;
+
+        // get all weapons in scene
+        GameObject[] sceneWeapons = GameObject.FindGameObjectsWithTag("weapon");
+        float minDist = float.MaxValue;
+
+        // iterate through each one
+        foreach (GameObject weapon in sceneWeapons)
+        {
+			Debug.Log(Vector2.Distance(weapon.transform.position, transform.position));
+			Debug.Log(pickupRange);
+
+            // calculate the distance to it
+            if(Vector2.Distance(weapon.transform.position, transform.position) < pickupRange && Vector2.Distance(weapon.transform.position, transform.position) < minDist)
+            {
+				nearestWeapon = weapon;
+            }
+        }
+
+        return nearestWeapon; 
+    }
 
 	public void Damage(float value)
 	{
