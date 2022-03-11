@@ -1,13 +1,14 @@
 using UnityEngine;
 
-// Abstract to inherit the OnTriggerEnter2D
+//used https://www.youtube.com/watch?v=8TqY6p-PRcs&ab_channel=DistortedPixelStudios for reference and inspiration
+
 public class ProjectileBehavior : WeaponController
 {
-
     public static float Speed = 15f;
     public static float _lifetime = 5f;
 
-    ProjectileBehavior() : base(0, new Vector3())
+
+    ProjectileBehavior() : base(0, new Vector3(), null)
     {
         base.SetEquipped(true);
     }
