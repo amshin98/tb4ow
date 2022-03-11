@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController2D))]
 public class PlayerController : MonoBehaviour
@@ -15,7 +16,6 @@ public class PlayerController : MonoBehaviour
 	[Header("Player Parameters")]
 	public WeaponController curWeapon;
 	public float curPercent = 0;
-	public HealthBar healthBar;
 	public bool isAI = false;
 
 	[Header("Script References")]
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 	bool jump = false;
 	bool attack = false;
 	bool interact = false;
-    
+
 
     private void Awake()
     {
@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
     void Update()
 	{
 		horizontalMove = Input.GetAxisRaw("Horizontal") * movementSpeed;
-
 		jump = Input.GetButton("Jump");
         attack = Input.GetKey(KeyCode.J);
         interact = Input.GetKey(KeyCode.K);
@@ -98,6 +97,6 @@ public class PlayerController : MonoBehaviour
 	public void Damage(float value)
 	{
 		curPercent += value;
-		healthBar.setSliderHealth((int)curPercent);
+		//healthBar.setSliderHealth((int)curPercent);
 	}
 }
