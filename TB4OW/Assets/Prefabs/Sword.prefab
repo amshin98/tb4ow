@@ -95,8 +95,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ed7d69b9e593644a362096d36e2918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupSound: Sword-Pickup
+  attackSound: Sword-Swing
+  hitSound: Sword-Hit
+  label: sword
   spriteRendererRef: {fileID: 3363546231036057755}
   _fireRate: 0.4
+  isFacingRight: 0
+  attacking: 0
+  _equipped: 0
 --- !u!61 &3363546231036057753
 BoxCollider2D:
   m_ObjectHideFlags: 0

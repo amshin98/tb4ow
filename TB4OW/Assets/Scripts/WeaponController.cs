@@ -10,6 +10,7 @@ public abstract class WeaponController : MonoBehaviour
     [Header("References")]
     public string label;
     public SpriteRenderer spriteRendererRef;
+    public AudioManager audioManager = null;
 
     [Header("Behaviors")]
     [SerializeField] private float _fireRate;
@@ -24,6 +25,9 @@ public abstract class WeaponController : MonoBehaviour
     private Vector3 _equipPos;
     protected Vector2 launchVector;
     protected float percentDamage = 10f;
+    // when weapon stays in trigger, need a flag for if damage needs to be applied a second time
+    // after the initial damage when the trigger is entered
+    private bool dealDamage = true;
 
     public WeaponController(float fireRate, Vector3 equipPos, SpriteRenderer spriteRenderer, string label)
     {
@@ -38,11 +42,16 @@ public abstract class WeaponController : MonoBehaviour
 
     public void Awake(){
         // _collider = GetComponent<Collider2D>();
+        if (audioManager == null){
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 
     public void SetEquipped(bool equipped)
     {
         _equipped = equipped;
+        // if(_equipped){
+        // }
     }
 
     public bool GetEquipped()
@@ -55,7 +64,7 @@ public abstract class WeaponController : MonoBehaviour
     // Handles dealing damage/knockback
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (_equipped && attacking && other.CompareTag("Player"))
+        if (_equipped && attacking && other.CompareTag("Player") && dealDamage)
         {
             PlayerController otherPC = other.GetComponent<PlayerController>();
             float playerPercent = otherPC.curPercent;
@@ -74,6 +83,16 @@ public abstract class WeaponController : MonoBehaviour
             }
 
             otherPC.curPercent = playerPercent;
+
+            audioManager.Play(hitSound);
+
+            dealDamage = false;
+        }
+    }
+
+    public void OnTriggerStay2D(Collider2D other){
+        if(dealDamage){
+            OnTriggerEnter2D(other);
         }
     }
 
@@ -95,7 +114,9 @@ public abstract class WeaponController : MonoBehaviour
         if (Time.time > _nextFire)
         {
             _nextFire = Time.time + _fireRate;
+            audioManager.Play(attackSound);
             UseWeapon();
+            dealDamage = true;
         }
     }
 
@@ -103,6 +124,8 @@ public abstract class WeaponController : MonoBehaviour
     public void Equip()
     {
         gameObject.transform.localPosition = _equipPos;
+        audioManager.Play(pickupSound);
+
     }
 
 

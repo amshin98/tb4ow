@@ -95,8 +95,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04bf1919731209e4597b935b0853faa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupSound: FishBucket-Pickup
+  attackSound: Fish-Throw
+  hitSound: Fish-Hit
+  label: fish bucket
   spriteRendererRef: {fileID: 5152585664494354949}
   _fireRate: 1
+  isFacingRight: 0
+  attacking: 0
+  _equipped: 0
   projectile: {fileID: 7986960856216423950, guid: 6decd159d654b1d4d858edb6b909be1c,
     type: 3}
 --- !u!61 &2682778548418724821
