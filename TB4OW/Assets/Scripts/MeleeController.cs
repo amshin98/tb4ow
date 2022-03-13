@@ -41,7 +41,7 @@ public class MeleeController : WeaponController
         _startRotation = new Vector3(0, 0, 0);
         _endRotation = new Vector3(0, 0, -140);
 
-        _endPosition = _startPosition + new Vector3(0.12f, -0.35f, 0);
+        _endPosition = _startPosition + new Vector3(0.8f, -1.5f, 0);
         _collider = GetComponent<Collider2D>();
     }
 
@@ -69,7 +69,6 @@ public class MeleeController : WeaponController
         }
         else if (_swingStatus == SwingStatus.RETURNING)
         {
-            base.attacking = false;
             float lerpRatio = (Time.time - _swingStatusStartTime) /
                 (_swingEndTime - _swingStatusStartTime);
 
@@ -85,6 +84,10 @@ public class MeleeController : WeaponController
                 newRotation.eulerAngles = Vector3.Lerp(_endRotation, _startRotation, lerpRatio);
                 transform.localRotation = newRotation;
             }
+        }
+        else 
+        {
+            base.attacking = false;
         }
     }
 

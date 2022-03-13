@@ -195,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7033330615235328415}
   movementSpeed: 40
-  pickupRange: 10
+  pickupRange: 1
   curWeapon: {fileID: 0}
   curPercent: 0
   healthBar: {fileID: 0}
@@ -205,7 +205,7 @@ MonoBehaviour:
   jumpSound: 
   landSound: 
   aiTargetPos: {fileID: 1493244232}
-  animator: {fileID: 0}
+  animator: {fileID: 1083770646782647980}
 --- !u!95 &1083770646782647980
 Animator:
   serializedVersion: 3

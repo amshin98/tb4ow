@@ -76,9 +76,13 @@ public class PlayerController : MonoBehaviour
 	{
 		if (curWeapon != null)
 		{
-			// Drop weapon
-			curWeapon.transform.parent = null;
-			curWeapon = null;
+			if (!curWeapon.GetAttacking())
+			{
+				// Drop weapon
+				curWeapon.ToggleEquipped();
+				curWeapon.transform.parent = null;
+				curWeapon = null;
+			}
 		}
 		else
 		{
@@ -87,7 +91,6 @@ public class PlayerController : MonoBehaviour
 
 			if (nearestWeapon != null)
 			{
-
 				// Pick up, equip, and active weapon
 				curWeapon = nearestWeapon.GetComponent<WeaponController>();
 				curWeapon.transform.parent = gameObject.transform;
