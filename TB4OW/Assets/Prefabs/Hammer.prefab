@@ -26,9 +26,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267767507653282478}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.113, y: 0.179, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
+  m_LocalScale: {x: 0.22909, y: 0.22909, z: 4.5818}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,6 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d9cc028f1895b4192d84670d6ca4e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupSound: Hammer-Pickup
+  attackSound: Hammer-Swing
+  hitSound: Hammer-Hit1
   spriteRendererRef: {fileID: 267767507653282476}
   _fireRate: 0.6
 --- !u!61 &3345923385311435356

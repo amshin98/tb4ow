@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4590317755711749139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4590317755711749137}
+  - component: {fileID: 4590317755711749138}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4590317755711749137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4590317755711749139}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.2038734, y: -0.9639742, z: -3.8125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4590317755711749138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4590317755711749139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af48a6f7b764f84da5fc5eb77a0f1ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: BattleStart
+    clip: {fileID: 8300000, guid: 5ad2f21f903c6314383d3503086a2735, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BattleTheme1
+    clip: {fileID: 8300000, guid: fed5cbb38a6179d4f82cec1801b704e0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: BattleTheme2
+    clip: {fileID: 8300000, guid: cb50821bed20a7841997327f6fd94c62, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: BattleTheme3
+    clip: {fileID: 8300000, guid: 06cf3cd4a5c466f449062330704f04d6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: EndCheer
+    clip: {fileID: 8300000, guid: f5c5bb235532046419f45c0e8b77ee9a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Fish-Hit
+    clip: {fileID: 8300000, guid: 3f02ff739d59783448a6c9755a7d6d4e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Fish-Throw
+    clip: {fileID: 8300000, guid: a5ea19e7ed425b44eb874318be4a1a02, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: FishBucket-Pickup
+    clip: {fileID: 8300000, guid: 31805956b5c19f844af65bc9167a620b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hammer-Hit1
+    clip: {fileID: 8300000, guid: e77714e6c2c3bbc46ac4433074b1bfc4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hammer-Hit2
+    clip: {fileID: 8300000, guid: d446c6f8956079540b5ba361f942de41, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hammer-Hit3
+    clip: {fileID: 8300000, guid: d1c26fc0670fbd94b986145d55baa6d2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hammer-Pickup
+    clip: {fileID: 8300000, guid: 57c19dda5f2d6ab41852aab504977f4e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hammer-Swing
+    clip: {fileID: 8300000, guid: 441f5d09a9701a14996a77268901f835, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LoseLife
+    clip: {fileID: 8300000, guid: f9ae82025bc29e641a9ca8e818a55ce6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MenuTheme1
+    clip: {fileID: 8300000, guid: 600e704676a7f5642a7461da7e5dd8e0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: MenuTheme2
+    clip: {fileID: 8300000, guid: 97165226821e40d4290c348353107309, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PenguinJump
+    clip: {fileID: 8300000, guid: 179c2d747a3b1654d97107ac4ec68227, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PenguinLand1
+    clip: {fileID: 8300000, guid: aba29547e40fbe549a791ab3ec018971, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PenguinLand2
+    clip: {fileID: 8300000, guid: 2694e986feda68f418c8e74e3e211adb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Sword-Hit
+    clip: {fileID: 8300000, guid: 7ea7e9fd16fb1684d9f49fdcac1bbf12, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Sword-Pickup
+    clip: {fileID: 8300000, guid: d6dc9fdc298cac14dbdd59994255b703, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Sword-Swing
+    clip: {fileID: 8300000, guid: 470b12511538b4940aacfc2d4af908a2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

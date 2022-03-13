@@ -5,6 +5,7 @@ using Pathfinding;
 
 // from https://www.youtube.com/watch?v=sWqRfygpl4I
 
+[RequireComponent(typeof(Seeker))]
 public class EnemyAI : MonoBehaviour
 {
     [Header("Pathfinding")]
@@ -15,7 +16,6 @@ public class EnemyAI : MonoBehaviour
     [Header("Physics")]
     [SerializeField] private  float nextWaypointDistance = 3f;
     [SerializeField] private  float jumpNodeHeightRequirement = 0.8f;
-    [SerializeField] private  float jumpCheckOffset = 0.1f;
 
     [Header("Custom Behavior")]
     [SerializeField] private  bool followEnabled = true;
@@ -23,7 +23,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private  bool directionLookEnabled = true;
     [SerializeField] private  PlayerController selfPlayerRef = null;
     [SerializeField] private  GameObject otherPlayerGO = null;
-    [SerializeField] private  List<GameObject> sceneWeapons = new List<GameObject>();
     [SerializeField] private float minDistance = .2f;
     [SerializeField] private float rangedAttackHeightThreshold = .1f;
     [SerializeField] private float itemPickupDistThreshold = .21f;
@@ -57,7 +56,7 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // use max dimension of current weapon to calculate range of attacks
+        // TurnTowardsPlayer();
 
         if(selfPlayerRef.curWeapon == null){
             GameObject nearestWeapon = GetNearestWeapon();
@@ -67,14 +66,14 @@ public class EnemyAI : MonoBehaviour
                 target = nearestWeapon.transform;
                 if (Vector2.Distance(transform.position, target.transform.position) < itemPickupDistThreshold)
                 {
-                    Debug.Log("Picking up weapon");
+                    //Debug.Log("Picking up weapon");
                     MoveToTarget();
                     selfPlayerRef.WeaponInteract();
                 }
                 else
                 {
                     // Debug.Log(Vector2.Distance(transform.position, target.transform.position));
-                    Debug.Log("Moving to weapon");
+                    //Debug.Log("Moving to weapon");
                     MoveToTarget();
                 }
             }
@@ -84,21 +83,21 @@ public class EnemyAI : MonoBehaviour
                 }
                 else{
                     // shoving match
-                    target = otherPlayerGO.transform;
+                    target = otherPlayerRef.aiTargetPos;
                     MoveToTarget();
                 }
             }
         }
         else{
-            target = otherPlayerGO.transform;
+            target = otherPlayerRef.aiTargetPos;
 
             float weaponRange = GetRangeOfWeapon(selfPlayerRef.curWeapon);
 
-            if (selfPlayerRef.curWeapon._fireRate == RangedController.fireRate)
+            if (selfPlayerRef.curWeapon.label.Equals("fish bucket"))
             {
                 if (Mathf.Abs(otherPlayerGO.transform.position.y - transform.position.y) < rangedAttackHeightThreshold)
                 {
-                    Debug.Log("Fire");
+                    //Debug.Log("Fire");
                     //RangedController tmp = (RangedController)selfPlayerRef.curWeapon;
 
                     //tmp.UseWeapon();
@@ -111,18 +110,26 @@ public class EnemyAI : MonoBehaviour
             }
             else if (Vector2.Distance(transform.position, target.transform.position) < weaponRange)
             {
-                Debug.Log("Attack Player");
+                //Debug.Log("Attack Player");
                 MoveToTarget();
                 selfPlayerRef.curWeapon.Attack();
             }
             else
             {
-                Debug.Log("Move To Player");
+                //Debug.Log("Move To Player");
                 MoveToTarget();
             }
-/*            target = otherPlayerGO.transform;
-            MoveToTarget();*/
     
+        }
+    }
+
+    private void TurnTowardsPlayer(){
+        if(transform.position.x - otherPlayerGO.transform.position.x < 0){
+            selfPlayerRef.controller.m_FacingRight = true;
+        }
+        else{
+            selfPlayerRef.controller.m_FacingRight = false;
+
         }
     }
 
@@ -151,6 +158,7 @@ public class EnemyAI : MonoBehaviour
                     nearestWeapon = weapon;
             }
         }
+
         return nearestWeapon; 
     }
 
@@ -177,23 +185,23 @@ public class EnemyAI : MonoBehaviour
         }
 
         // See if colliding with anything
-        Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
-        isGrounded = Physics2D.Raycast(startOffset, -Vector3.up, 0.05f);
+        Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y);
 
         // Direction Calculation
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         bool jump = false;
         // Jump
-        if (jumpEnabled && isGrounded)
+        if (jumpEnabled)
         {
             if (direction.y > jumpNodeHeightRequirement)
             {
+                //Debug.Log("Jump");
                 jump = true;
             }
         }
 
         // Movement
-        selfPlayerRef.MovePlayer(direction.normalized.x, jump);
+        selfPlayerRef.controller.Move(direction.x * Time.fixedDeltaTime * selfPlayerRef.movementSpeed, false, jump);
 
         // Next Waypoint
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
