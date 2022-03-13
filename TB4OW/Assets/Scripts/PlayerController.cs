@@ -7,6 +7,8 @@ public class PlayerController: MonoBehaviour {
   public ProjectileBehavior ProjectilePrefab;
   public Transform launchPoint;
 
+    public float speed;
+
   public float knockbackForce;
   private bool canMove;
   private Vector2 knockBackPosition;
