@@ -72,7 +72,7 @@ public abstract class WeaponController : MonoBehaviour
             playerPercent += percentDamage;
 
             Vector2 scaledKnockback = launchVector * GetLaunchScale(playerPercent);
-            Debug.Log(scaledKnockback);
+            //Debug.Log(scaledKnockback);
             if (isFacingRight)
             {
                 otherRigidbody.AddForce(scaledKnockback);
