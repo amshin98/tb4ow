@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
 	bool jump = false;
 	bool attack = false;
 	bool interact = false;
+
+	public Animator animator;
 	
 
 	private void Awake()
@@ -65,6 +67,7 @@ public class PlayerController : MonoBehaviour
 		if(!isAI)
 		{
 			controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 			jump = false;
 		}
 	}
