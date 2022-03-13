@@ -60,6 +60,7 @@ public class LifeStock : MonoBehaviour
         if (!isVisible(cam, player))
         {
             health -= 1;
+            SpawnObject();
         }
     }
 
@@ -78,5 +79,10 @@ public class LifeStock : MonoBehaviour
         }
         return true;
         //return false;
+    }
+
+    public void SpawnObject()
+    {
+        Instantiate(player, transform.position, transform.rotation);
     }
 }
