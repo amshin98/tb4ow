@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 	public float movementSpeed = 40f;
 
 	[Header("Weapon Interact Parameters")]
-	public float pickupRange = .1f;
+	public float pickupRange = 1.0f;
 
 	[Header("Player Parameters")]
 	public WeaponController curWeapon;
@@ -20,60 +20,62 @@ public class PlayerController : MonoBehaviour
 
 	[Header("Script References")]
 	public ProjectileBehavior ProjectilePrefab;
-    public string jumpSound;
-    public string landSound;
+	public string jumpSound;
+	public string landSound;
 	public Transform aiTargetPos;
 
 	float horizontalMove = 0f;
 	bool jump = false;
 	bool attack = false;
 	bool interact = false;
-    
+	
 
-    private void Awake()
-    {
+	private void Awake()
+	{
 		if (controller == null)
 			controller = GetComponent<CharacterController2D>();
-    }
+	}
 
-    void Update()
+	void Update()
 	{
 		horizontalMove = Input.GetAxisRaw("Horizontal") * movementSpeed;
 
 		jump = Input.GetButton("Jump");
-        attack = Input.GetKey(KeyCode.J);
-        interact = Input.GetKey(KeyCode.K);
+
 		if(curWeapon != null)
 			curWeapon.isFacingRight = controller.m_FacingRight;
-	}
 
-	void FixedUpdate()
-	{
-        // Move our character
 		if(!isAI)
-        {
-			controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-			jump = false;
-
-			if (attack && curWeapon != null)
+		{
+			if (Input.GetButtonDown("Fire1") && curWeapon != null)
 			{
 				curWeapon.Attack();
 			}
 
-			if (interact)
+			if (Input.GetButtonDown("Fire2"))
 			{
 				WeaponInteract();
 			}
 		}
-    }
+	}
+
+	void FixedUpdate()
+	{
+		// Move our character
+		if(!isAI)
+		{
+			controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+			jump = false;
+		}
+	}
 
 	public void WeaponInteract()
 	{
 		if (curWeapon != null)
 		{
 			// Drop weapon
-			// curWeapon.transform.parent = null;
-			// curWeapon = null;
+			curWeapon.transform.parent = null;
+			curWeapon = null;
 		}
 		else
 		{
@@ -82,7 +84,6 @@ public class PlayerController : MonoBehaviour
 
 			if (nearestWeapon != null)
 			{
-
 
 				// Pick up, equip, and active weapon
 				curWeapon = nearestWeapon.GetComponent<WeaponController>();
@@ -95,27 +96,24 @@ public class PlayerController : MonoBehaviour
 
 	private GameObject GetNearestWeapon() {
 
-        GameObject nearestWeapon = null;
+		GameObject nearestWeapon = null;
 
-        // get all weapons in scene
-        GameObject[] sceneWeapons = GameObject.FindGameObjectsWithTag("weapon");
-        float minDist = float.MaxValue;
+		// get all weapons in scene
+		GameObject[] sceneWeapons = GameObject.FindGameObjectsWithTag("weapon");
+		float minDist = float.MaxValue;
 
-        // iterate through each one
-        foreach (GameObject weapon in sceneWeapons)
-        {
-			Debug.Log(Vector2.Distance(weapon.transform.position, transform.position));
-			Debug.Log(pickupRange);
-
-            // calculate the distance to it
-            if(Vector2.Distance(weapon.transform.position, transform.position) < pickupRange && Vector2.Distance(weapon.transform.position, transform.position) < minDist)
-            {
+		foreach (GameObject weapon in sceneWeapons)
+		{
+			float dist = Vector2.Distance(weapon.transform.position, transform.position);
+			if (dist <= pickupRange && dist < minDist && !weapon.GetComponent<WeaponController>().GetEquipped())
+			{
+				minDist = dist;
 				nearestWeapon = weapon;
-            }
-        }
+			}
+		}
 
-        return nearestWeapon; 
-    }
+		return nearestWeapon; 
+	}
 
 	public void Damage(float value)
 	{

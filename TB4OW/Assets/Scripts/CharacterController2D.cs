@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class CharacterController2D : MonoBehaviour
 {
-	[SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
+	[SerializeField] private float m_JumpForce = 1000f;                          // Amount of force added when the player jumps.
 	[SerializeField] private string jumpSound = "PenguinJump";
 	[SerializeField] private AudioManager audioManager = null;
 
