@@ -1,129 +1,123 @@
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController: MonoBehaviour {
-  // With 4.2 gravity scale
-  public float MovementSpeed = 12;
-  public float jumpForce = 14;
-  public ProjectileBehavior ProjectilePrefab;
-  public Transform launchPoint;
+[RequireComponent(typeof(CharacterController2D))]
+public class PlayerController : MonoBehaviour
+{
+	[Header("Movement Parameters")]
+	public CharacterController2D controller = null;
+	public float movementSpeed = 40f;
 
-    public float speed;
+	[Header("Weapon Interact Parameters")]
+	public float pickupRange = 1.0f;
 
-  public float knockbackForce;
-  private bool canMove;
-  private Vector2 knockBackPosition;
+	[Header("Player Parameters")]
+	public WeaponController curWeapon;
+	public float curPercent = 0;
+	public HealthBar healthBar;
+	public bool isAI = false;
 
-  private Rigidbody2D _rigidbody;
+	[Header("Script References")]
+	public ProjectileBehavior ProjectilePrefab;
+	public string jumpSound;
+	public string landSound;
+	public Transform aiTargetPos;
 
-  // Weapon
-  public WeaponController curWeapon;
-  public float pickupRange = 10f;
-  private Collider2D _collider;
+	float horizontalMove = 0f;
+	bool jump = false;
+	bool attack = false;
+	bool interact = false;
+	
 
-  public int curHealth;
-  public int maxHealth;
-  public HealthBar healthBar;
+	private void Awake()
+	{
+		if (controller == null)
+			controller = GetComponent<CharacterController2D>();
+	}
 
-  public bool isAI = false;
+	void Update()
+	{
+		horizontalMove = Input.GetAxisRaw("Horizontal") * movementSpeed;
 
-  // Start is called before the first frame update
-  void Start() {
-    _rigidbody = GetComponent < Rigidbody2D > ();
-    _collider = GetComponent < Collider2D > ();
-  }
+		jump = Input.GetButton("Jump");
 
-  // Update is called once per frame
-  void FixedUpdate() {
-    if (!isAI) {
-      var playerInput = Input.GetAxisRaw("Horizontal");
+		if(curWeapon != null)
+			curWeapon.isFacingRight = controller.m_FacingRight;
 
-      // Movement
-      MovePlayer(playerInput, Input.GetButtonDown("Jump"));
+		if(!isAI)
+		{
+			if (Input.GetButtonDown("Fire1") && curWeapon != null)
+			{
+				curWeapon.Attack();
+			}
 
-      // Attacking
-      if (Input.GetButtonDown("Fire1") && curWeapon != null) {
-        curWeapon.Attack();
-      }
+			if (Input.GetButtonDown("Fire2"))
+			{
+				WeaponInteract();
+			}
+		}
+	}
 
-      // TODO: pickup
-      if (Input.GetButtonDown("Fire2")) {
-        WeaponInteract();
-      }
-    }
-  }
+	void FixedUpdate()
+	{
+		// Move our character
+		if(!isAI)
+		{
+			controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+			jump = false;
+		}
+	}
 
-  public void MovePlayer(float playerInput, bool jump) {
-    if (canMove) {
-      transform.position += MovementSpeed * Time.deltaTime * new Vector3(playerInput, 0, 0);
+	public void WeaponInteract()
+	{
+		if (curWeapon != null)
+		{
+			// Drop weapon
+			curWeapon.transform.parent = null;
+			curWeapon = null;
+		}
+		else
+		{
+			// Check for weapon pickup
+			GameObject nearestWeapon = GetNearestWeapon();
 
-      if (!Mathf.Approximately(0, playerInput)) {
-        transform.rotation = playerInput < 0 ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
-      }
-      if (jump && Mathf.Abs(_rigidbody.velocity.y) < 0.001f) {
-        _rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-      }
-    }
-    else { //knockback
-      Debug.Log("HERE");
-      float step = speed * Time.deltaTime;
-      transform.position = Vector2.MoveTowards(transform.position, knockBackPosition, step);
-      if (Vector2.Distance(transform.position, knockBackPosition) < 0.001f) {
-        canMove = true;
-      }
-    }
-  }
+			if (nearestWeapon != null)
+			{
 
-  public void WeaponInteract() {
-    if (curWeapon != null) {
-      // Drop weapon
-      curWeapon.transform.parent = null;
-      curWeapon = null;
-      Debug.Log("dropp");
-    }
-    else {
-      // Check for weapon pickup
-      LayerMask weaponLayerMask = LayerMask.GetMask("Weapons");
+				// Pick up, equip, and active weapon
+				curWeapon = nearestWeapon.GetComponent<WeaponController>();
+				curWeapon.transform.parent = gameObject.transform;
+				curWeapon.Equip();
+				curWeapon.ToggleEquipped();
+			}
+		}
+	}
 
-      Collider2D[] weaponsInRange = Physics2D.OverlapCircleAll(
-      transform.position, pickupRange, weaponLayerMask);
+	private GameObject GetNearestWeapon() {
 
-      if (weaponsInRange.Length > 0) {
+		GameObject nearestWeapon = null;
 
-        /*                // Find closest weapon
-                int minDistIdx = 0;
-                float minDist = _collider.Distance(weaponsInRange[0]).distance;
+		// get all weapons in scene
+		GameObject[] sceneWeapons = GameObject.FindGameObjectsWithTag("weapon");
+		float minDist = float.MaxValue;
 
-                for (int i = 1; i < weaponsInRange.Length; i++)
-                {
-                    float curDist = _collider.Distance(weaponsInRange[i]).distance;
-                    if (curDist < minDist)
-                    {
-                        minDistIdx = i;
-                        minDist = curDist;
-                    }
-                }*/
+		foreach (GameObject weapon in sceneWeapons)
+		{
+			float dist = Vector2.Distance(weapon.transform.position, transform.position);
+			if (dist <= pickupRange && dist < minDist && !weapon.GetComponent<WeaponController>().GetEquipped())
+			{
+				minDist = dist;
+				nearestWeapon = weapon;
+			}
+		}
 
-        // Pick up, equip, and active weapon
-        curWeapon = weaponsInRange[0].gameObject.GetComponent < WeaponController > ();
-        Debug.Log(curWeapon);
-        curWeapon.transform.parent = gameObject.transform;
-        curWeapon.Equip();
-        curWeapon.ToggleEquipped();
-      }
-    }
-  }
-  public void damage(int value) {
-    curHealth -= value;
-    healthBar.setSliderHealth(curHealth);
-  }
+		return nearestWeapon; 
+	}
 
-  private void OnTriggerEnter2D(Collider2D other) {
-    if (other.tag == "Enemy") {
-      canMove = false;
-      Vector2 difference = (transform.position - other.transform.position).normalized;
-      Vector2 force = difference * knockbackForce;
-      knockBackPosition = ((Vector2) transform.position) + force;
-    }
-  }
-
+	public void Damage(float value)
+	{
+		curPercent += value;
+		healthBar.setSliderHealth((int)curPercent);
+	}
 }

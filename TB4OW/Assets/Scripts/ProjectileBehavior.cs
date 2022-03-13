@@ -8,19 +8,22 @@ public class ProjectileBehavior : WeaponController
     public static float _lifetime = 5f;
 
 
-    ProjectileBehavior() : base(0, new Vector3(), null)
+    ProjectileBehavior() : base(0, new Vector3(), null, "fish")
     {
+        base.launchVector = (new Vector2(1, 1)).normalized;
+        base.percentDamage = 10f;
         base.SetEquipped(true);
     }
 
     private void Start()
     {
+        base.attacking = true;
         gameObject.transform.parent = null;
         Destroy(gameObject, _lifetime);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 moveVec = transform.right;
         moveVec.z = 0;

@@ -16,7 +16,7 @@ public class HealthPercentage : MonoBehaviour
     void Update()
     {
        
-        healthText.text = player.curHealth.ToString() + "%";
+        healthText.text = player.curPercent.ToString() + "%";
     
     }
 }

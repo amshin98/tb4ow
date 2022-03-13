@@ -9,5 +9,9 @@ public class HammerController : MeleeController
 
     public static Vector3 equipPos = new Vector3(0.113f, 0.179f, 0);
 
-    public HammerController() : base(_swingSpeed, _delay, equipPos, spriteRenderer) { }
+    public HammerController() : base(_swingSpeed, _delay, equipPos, spriteRenderer, "hammer") {
+        base.percentDamage = 30f;
+        base.launchVector = (new Vector2(1, 2)).normalized;
+
+    }
 }
