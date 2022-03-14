@@ -9,12 +9,12 @@ public class RangedController : WeaponController
     private const float Y_OFFSET = 0.0f;
 
     public ProjectileBehavior projectile;
-    public static float fireRate = 1f;
+    public static float fireRate = .1f;
 
     public static Vector3 equipPos = new Vector3(1f, 0.002f, 0);
 
     RangedController() : base(fireRate, equipPos, spriteRenderer, "fish bucket") {
-        base.percentDamage = 10f;
+        base.percentDamage = 15f;
         base.launchVector = (new Vector2(1, 1)).normalized;
     }
 

@@ -10,7 +10,7 @@ public class SwordController : MeleeController
     public static Vector3 equipPos = new Vector3(0.9f, 0.8f, 0);
 
     public SwordController() : base(_swingSpeed, _delay, equipPos, spriteRenderer, "sword") {
-        base.percentDamage = 15f;
-        base.launchVector = (new Vector2(1, 1)).normalized;
+        base.percentDamage = 20f;
+        base.launchVector = (new Vector2(3, 1)).normalized;
     }
 }

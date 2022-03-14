@@ -101,7 +101,7 @@ MonoBehaviour:
   label: fish bucket
   spriteRendererRef: {fileID: 5152585664494354949}
   audioManager: {fileID: 0}
-  _fireRate: 1
+  _fireRate: 0.2
   isFacingRight: 0
   attacking: 0
   _equipped: 0

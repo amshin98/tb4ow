@@ -4,28 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController2D))]
-public class PlayerController : MonoBehaviour
+public class TwoPlayerController : PlayerController
 {
-	[Header("Movement Parameters")]
-	public CharacterController2D controller = null;
-	public float movementSpeed = 40f;
-
-	[Header("Weapon Interact Parameters")]
-	public float pickupRange = 1.0f;
-
-	[Header("Player Parameters")]
-	public WeaponController curWeapon;
-	public float curPercent = 0;
-	public bool isAI = false;
-
-	[Header("Script References")]
-	public Transform aiTargetPos;
-
-	protected float horizontalMove = 0f;
-	protected bool jump = false;
-
-	protected  float knockbackStartTime = 0;
-	protected  float knockbackDuration = 0.5f;
+	public KeyCode leftMoveKey;
+	public KeyCode rightMoveKey;
+	public KeyCode jumpKey;
+	public KeyCode attackKey;
+	public KeyCode pickupKey;
 	
 
 	private void Awake()
@@ -43,9 +28,15 @@ public class PlayerController : MonoBehaviour
 		}
 
 
-		horizontalMove = Input.GetAxisRaw("Horizontal") * movementSpeed;
-		jump = Input.GetButton("Jump");
-		
+		horizontalMove = 0;
+
+		if(Input.GetKey(rightMoveKey))
+			horizontalMove += 1;
+		if(Input.GetKey(leftMoveKey))
+			horizontalMove -= 1;
+		jump = Input.GetKey(jumpKey);
+
+		horizontalMove *= movementSpeed;
 
 		if(curWeapon != null)
 			curWeapon.isFacingRight = controller.m_FacingRight;
@@ -54,9 +45,8 @@ public class PlayerController : MonoBehaviour
 		{
 			bool fire;
 			bool pickup;
-
-			fire = Input.GetButtonDown("Fire1");
-			pickup = Input.GetButtonDown("Fire2");
+			fire = Input.GetKeyDown(attackKey);
+			pickup = Input.GetKeyDown(pickupKey);
 
 			if (fire && curWeapon != null)
 			{
