@@ -20,8 +20,6 @@ public class PlayerController : MonoBehaviour
 
 	[Header("Script References")]
 	public ProjectileBehavior ProjectilePrefab;
-	public string jumpSound;
-	public string landSound;
 	public Transform aiTargetPos;
 
 	float horizontalMove = 0f;
