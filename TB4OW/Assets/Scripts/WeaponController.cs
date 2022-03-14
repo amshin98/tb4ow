@@ -29,6 +29,11 @@ public abstract class WeaponController : MonoBehaviour
     // after the initial damage when the trigger is entered
     private bool dealDamage = true;
 
+    public bool GetAttacking()
+    {
+        return attacking;
+    }
+
     public WeaponController(float fireRate, Vector3 equipPos, SpriteRenderer spriteRenderer, string label)
     {
         this.spriteRendererRef = spriteRenderer;
