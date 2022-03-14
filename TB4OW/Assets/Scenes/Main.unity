@@ -434,6 +434,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!4 &354684092 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5152585664494354948, guid: 00f69673eafeef049914df6018dc6a8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1589131522}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &359366011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,6 +1390,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1408831520035808889, guid: 115519832eb7a754892ed6feae601985,
     type: 3}
   m_PrefabInstance: {fileID: 405875109}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &792776227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2748762655719030282, guid: 115519832eb7a754892ed6feae601985,
+    type: 3}
+  m_PrefabInstance: {fileID: 405875109}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792776224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2968830ab3b00e84cbcbbf3d772c57c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &800738380 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3363546231036057754, guid: 0e34840f9b97b6047b1b09cc88a13b55,
+    type: 3}
+  m_PrefabInstance: {fileID: 802431787}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &802431787
 PrefabInstance:
@@ -3491,6 +3515,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.37, y: 0.37}
   m_EdgeRadius: 0
+--- !u!4 &1939219567 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 267767507653282477, guid: e07fc536207219b44a7bd09b2c2d8632,
+    type: 3}
+  m_PrefabInstance: {fileID: 1914024137}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1962194817
 GameObject:
   m_ObjectHideFlags: 0
@@ -3629,12 +3659,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 792776224}
+  forResWeapons: {fileID: 792776227}
+  hammer: {fileID: 1939219567}
+  sword: {fileID: 800738380}
+  bucket: {fileID: 354684092}
   cam: {fileID: 1322168730}
   spawnPoint: {fileID: 179568902}
-  heart1: {fileID: 269396950}
-  heart2: {fileID: 1784112061}
-  heart3: {fileID: 890455276}
+  playerHeart1: {fileID: 269396950}
+  playerHeart2: {fileID: 1784112061}
+  playerHeart3: {fileID: 890455276}
   gameOver: {fileID: 1118692688}
+  health: 0
   deathEvent:
     m_PersistentCalls:
       m_Calls:
