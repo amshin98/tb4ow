@@ -24,8 +24,6 @@ public class PlayerController : MonoBehaviour
 
 	float horizontalMove = 0f;
 	bool jump = false;
-	bool attack = false;
-	bool interact = false;
 
 	private float knockbackStartTime = 0;
 	private float knockbackDuration = 0.5f;
