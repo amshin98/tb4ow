@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
 	bool jump = false;
 	bool attack = false;
 	bool interact = false;
+
+	private float knockbackStartTime = 0;
+	private float knockbackDuration = 0.5f;
 	
 
 	private void Awake()
@@ -38,6 +41,12 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
+
+		if (Time.time - knockbackStartTime >= knockbackDuration)
+		{
+			controller.animator.SetFloat("Knocking", 0.0f);
+		}
+
 		horizontalMove = Input.GetAxisRaw("Horizontal") * movementSpeed;
 
 		jump = Input.GetButton("Jump");
@@ -116,6 +125,12 @@ public class PlayerController : MonoBehaviour
 		}
 
 		return nearestWeapon; 
+	}
+
+	public void Knockback()
+	{
+		controller.animator.SetFloat("Knocking", 1);
+		knockbackStartTime = Time.time;
 	}
 
 	public void Damage(float value)

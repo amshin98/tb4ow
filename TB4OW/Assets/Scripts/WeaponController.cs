@@ -86,7 +86,9 @@ public abstract class WeaponController : MonoBehaviour
             {
                 otherRigidbody.AddForce(new Vector2(scaledKnockback.x * -1, scaledKnockback.y));
             }
-
+            
+            otherPC.Knockback();
+            
             otherPC.curPercent = playerPercent;
 
             audioManager.Play(hitSound);
