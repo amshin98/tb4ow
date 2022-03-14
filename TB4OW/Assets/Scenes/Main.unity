@@ -3599,70 +3599,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.37, y: 0.37}
   m_EdgeRadius: 0
---- !u!1 &1987150004
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1987150006}
-  - component: {fileID: 1987150005}
-  m_Layer: 0
-  m_Name: LifeManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1987150005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1987150004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad7b0796c1ef1f04e8f3627ca77b2023, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 792776224}
-  cam: {fileID: 1322168730}
-  spawnPoint: {fileID: 179568902}
-  heart1: {fileID: 269396950}
-  heart2: {fileID: 1784112061}
-  heart3: {fileID: 890455276}
-  gameOver: {fileID: 1118692688}
-  deathEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1895932478}
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: LoseLife
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!4 &1987150006
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1987150004}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6102679, y: -1.1728071, z: -2821.3855}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2021185892
 GameObject:
   m_ObjectHideFlags: 0
@@ -4112,3 +4048,97 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &7690886542851606749
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7690886544771582056, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1322168730}
+    - target: {fileID: 7690886544771582056, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 792776224}
+    - target: {fileID: 7690886544771582056, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: gameOver
+      value: 
+      objectReference: {fileID: 1118692688}
+    - target: {fileID: 7690886544771582056, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 179568902}
+    - target: {fileID: 7690886544771582056, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1895932478}
+    - target: {fileID: 7690886544771582057, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: m_Name
+      value: LifeManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690886544771582059, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690886544771582059, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6102679
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690886544771582059, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.1728071
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690886544771582059, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2821.3855
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690886544771582059, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690886544771582059, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690886544771582059, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690886544771582059, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690886544771582059, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690886544771582059, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690886544771582059, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3af4a88a4e071dd21bf0c49ee3d22bac, type: 3}

@@ -5,9 +5,6 @@ using UnityEngine.Events;
 
 public class LifeStock : MonoBehaviour
 {
-    //Viewport.Bounds??
-    //Camera.Bounds??
-
     public GameObject player;
     public PlayerController forResWeapons;
    
