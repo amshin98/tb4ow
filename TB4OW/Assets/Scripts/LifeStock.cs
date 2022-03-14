@@ -106,19 +106,22 @@ public class LifeStock : MonoBehaviour
         //Instantiate(player, spawnPoint, Quaternion.identity);
         player.transform.position = spawnPoint.transform.position;
         if(forResWeapons.curWeapon is HammerController){
-        forResWeapons.curWeapon.transform.parent = null;
-        forResWeapons.curWeapon = null;
-        hammer.position = hammerPos;
+            forResWeapons.curWeapon.ToggleEquipped();
+            forResWeapons.curWeapon.transform.parent = null;
+            forResWeapons.curWeapon = null;
+            hammer.position = hammerPos;
         }
         if(forResWeapons.curWeapon is SwordController){
-        forResWeapons.curWeapon.transform.parent = null;
-        forResWeapons.curWeapon = null;
-        sword.position = swordPos;
+            forResWeapons.curWeapon.ToggleEquipped();
+            forResWeapons.curWeapon.transform.parent = null;
+            forResWeapons.curWeapon = null;
+            sword.position = swordPos;
         }
         if(forResWeapons.curWeapon is RangedController){
-        forResWeapons.curWeapon.transform.parent = null;
-        forResWeapons.curWeapon = null;
-        bucket.position = bucketPos;
+            forResWeapons.curWeapon.ToggleEquipped();
+            forResWeapons.curWeapon.transform.parent = null;
+            forResWeapons.curWeapon = null;
+            bucket.position = bucketPos;
         }
         // sword.transform.position = swordPos;
         // bucket.transform.position = bucketPos;
