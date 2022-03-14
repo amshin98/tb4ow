@@ -27,7 +27,8 @@ public class PlayerController : MonoBehaviour
 	bool attack = false;
 	bool interact = false;
 
-	public Animator animator;
+	private float knockbackStartTime = 0;
+	private float knockbackDuration = 0.5f;
 	
 
 	private void Awake()
@@ -38,6 +39,12 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
+
+		if (Time.time - knockbackStartTime >= knockbackDuration)
+		{
+			controller.animator.SetFloat("Knocking", 0.0f);
+		}
+
 		horizontalMove = Input.GetAxisRaw("Horizontal") * movementSpeed;
 		jump = Input.GetButton("Jump");
 
@@ -64,7 +71,6 @@ public class PlayerController : MonoBehaviour
 		if(!isAI)
 		{
 			controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 			jump = false;
 		}
 	}
@@ -116,6 +122,12 @@ public class PlayerController : MonoBehaviour
 		}
 
 		return nearestWeapon; 
+	}
+
+	public void Knockback()
+	{
+		controller.animator.SetFloat("Knocking", 1);
+		knockbackStartTime = Time.time;
 	}
 
 	public void Damage(float value)
