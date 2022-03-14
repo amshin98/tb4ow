@@ -19,8 +19,6 @@ public abstract class WeaponController : MonoBehaviour
     [SerializeField] private bool _equipped;
 
 
-
-
     private float _nextFire;
     private Vector3 _equipPos;
     protected Vector2 launchVector;
