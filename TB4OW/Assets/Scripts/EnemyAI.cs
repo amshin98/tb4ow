@@ -28,7 +28,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float itemPickupDistThreshold = .21f;
     [SerializeField] private float attackRangeModifier = .1f;
 
-
     private Path path;
     private int currentWaypoint = 0;
     private RaycastHit2D isGrounded;
@@ -102,6 +101,7 @@ public class EnemyAI : MonoBehaviour
 
                     //tmp.UseWeapon();
                     selfPlayerRef.curWeapon.Attack();
+
                 }
                 else
                 {

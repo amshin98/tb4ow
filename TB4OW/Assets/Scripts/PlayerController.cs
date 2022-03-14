@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController2D))]
 public class PlayerController : MonoBehaviour
@@ -15,7 +16,6 @@ public class PlayerController : MonoBehaviour
 	[Header("Player Parameters")]
 	public WeaponController curWeapon;
 	public float curPercent = 0;
-	public HealthBar healthBar;
 	public bool isAI = false;
 
 	[Header("Script References")]
@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
 	void Update()
 	{
 		horizontalMove = Input.GetAxisRaw("Horizontal") * movementSpeed;
-
 		jump = Input.GetButton("Jump");
 
 		if(curWeapon != null)
@@ -122,6 +121,6 @@ public class PlayerController : MonoBehaviour
 	public void Damage(float value)
 	{
 		curPercent += value;
-		healthBar.setSliderHealth((int)curPercent);
+		//healthBar.setSliderHealth((int)curPercent);
 	}
 }

@@ -6,16 +6,14 @@ using TMPro;
 public class HealthPercentage : MonoBehaviour
 {
     public PlayerController player;
-    public TMP_Text healthText;
+    public Text healthText;
 
     // Update is called once per frame
     void Start(){
-    healthText.text = "";
-   
+    healthText.text = "0%";
     }
     void Update()
     {
-       
         healthText.text = player.curPercent.ToString() + "%";
     
     }
