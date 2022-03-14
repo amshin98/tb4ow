@@ -28,7 +28,8 @@ public class RangedController : WeaponController
         // Shoot projectile
         var xOffset = transform.parent.rotation.y == 0 ? X_OFFSET_R : X_OFFSET_L;
         Quaternion rotation = Quaternion.Euler(0, isFacingRight ? 180 : 0, 0);
-        Instantiate(projectile,
-            transform.position + new Vector3(xOffset, Y_OFFSET, 0), rotation);
+        ProjectileBehavior newFish = Instantiate(projectile,
+                    transform.position + new Vector3(xOffset, Y_OFFSET, 0), rotation);
+        newFish.isFacingRight = base.isFacingRight;
     }
 }

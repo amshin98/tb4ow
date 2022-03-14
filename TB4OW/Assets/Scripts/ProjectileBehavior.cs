@@ -19,6 +19,7 @@ public class ProjectileBehavior : WeaponController
     {
         base.attacking = true;
         gameObject.transform.parent = null;
+        Debug.Log("is facing right = " + isFacingRight.ToString());
         Destroy(gameObject, _lifetime);
     }
 

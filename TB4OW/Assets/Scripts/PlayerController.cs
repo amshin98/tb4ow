@@ -128,9 +128,10 @@ public class PlayerController : MonoBehaviour
 		knockbackStartTime = Time.time;
 	}
 
-	public void Damage(float value)
+	public void SetDamage(float value)
 	{
-		curPercent += value;
-		//healthBar.setSliderHealth((int)curPercent);
+		curPercent = value;
 	}
+
+
 }

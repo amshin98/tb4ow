@@ -123,16 +123,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void TurnTowardsPlayer(){
-        if(transform.position.x - otherPlayerGO.transform.position.x < 0){
-            selfPlayerRef.controller.m_FacingRight = true;
-        }
-        else{
-            selfPlayerRef.controller.m_FacingRight = false;
-
-        }
-    }
-
 
     private float GetRangeOfWeapon(WeaponController weapon){
         Vector2 size = weapon.spriteRendererRef.bounds.size;
@@ -202,6 +192,7 @@ public class EnemyAI : MonoBehaviour
 
         // Movement
         selfPlayerRef.controller.Move(direction.x * Time.fixedDeltaTime * selfPlayerRef.movementSpeed, false, jump);
+        // TurnTowardsPlayer();
 
         // Next Waypoint
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
@@ -223,6 +214,16 @@ public class EnemyAI : MonoBehaviour
             }
         }
     }
+
+    // private void TurnTowardsPlayer(){
+    //     if(transform.position.x - otherPlayerGO.transform.position.x < 0){
+    //         selfPlayerRef.controller.m_FacingRight = true;
+    //     }
+    //     else{
+    //         selfPlayerRef.controller.m_FacingRight = false;
+
+    //     }
+    // }
 
     private bool TargetInDistance()
     {
