@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed46e68403c6dfa479181dd878fb97d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 390
+  m_JumpForce: 1000
   jumpSound: PenguinJump
   audioManager: {fileID: 0}
   m_MovementSmoothing: 0.05
