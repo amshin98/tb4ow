@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LifeStock : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class LifeStock : MonoBehaviour
 
     public GameObject heart1, heart2, heart3, gameOver;
     public static int health;
+    public UnityEvent deathEvent;
 
     // Use this for initialization
     private void Start()
@@ -63,6 +65,7 @@ public class LifeStock : MonoBehaviour
 
         if (!isVisible(cam, player))
         {
+            deathEvent.Invoke();
             health -= 1;
             SpawnObject();
             //Destroy(player);
