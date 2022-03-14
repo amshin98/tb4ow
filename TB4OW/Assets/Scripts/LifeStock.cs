@@ -14,16 +14,16 @@ public class LifeStock : MonoBehaviour
 
     public GameObject spawnPoint;
 
-    public GameObject heart1, heart2, heart3, gameOver;
-    public static int health;
+    public GameObject playerHeart1, playerHeart2, playerHeart3, gameOver;
+    public int health;
 
     // Use this for initialization
     private void Start()
     {
         health = 3;
-        heart1.gameObject.SetActive(true);
-        heart2.gameObject.SetActive(true);
-        heart3.gameObject.SetActive(true);
+        playerHeart1.gameObject.SetActive(true);
+        playerHeart2.gameObject.SetActive(true);
+        playerHeart3.gameObject.SetActive(true);
         gameOver.gameObject.SetActive(false);
     }
 
@@ -36,24 +36,24 @@ public class LifeStock : MonoBehaviour
         switch (health)
         {
             case 3:
-                heart1.gameObject.SetActive(true);
-                heart2.gameObject.SetActive(true);
-                heart3.gameObject.SetActive(true);
+                playerHeart1.gameObject.SetActive(true);
+                playerHeart2.gameObject.SetActive(true);
+                playerHeart3.gameObject.SetActive(true);
                 break;
             case 2:
-                heart1.gameObject.SetActive(true);
-                heart2.gameObject.SetActive(true);
-                heart3.gameObject.SetActive(false);
+                playerHeart1.gameObject.SetActive(true);
+                playerHeart2.gameObject.SetActive(true);
+                playerHeart3.gameObject.SetActive(false);
                 break;
             case 1:
-                heart1.gameObject.SetActive(true);
-                heart2.gameObject.SetActive(false);
-                heart3.gameObject.SetActive(false);
+                playerHeart1.gameObject.SetActive(true);
+                playerHeart2.gameObject.SetActive(false);
+                playerHeart3.gameObject.SetActive(false);
                 break;
             case 0:
-                heart1.gameObject.SetActive(false);
-                heart2.gameObject.SetActive(false);
-                heart3.gameObject.SetActive(false);
+                playerHeart1.gameObject.SetActive(false);
+                playerHeart2.gameObject.SetActive(false);
+                playerHeart3.gameObject.SetActive(false);
                 gameOver.gameObject.SetActive(true);
                 break;
         }
