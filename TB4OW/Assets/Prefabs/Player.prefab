@@ -181,6 +181,7 @@ MonoBehaviour:
   OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
+  animator: {fileID: 1083770646782647980}
 --- !u!114 &2748762655719030282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +206,6 @@ MonoBehaviour:
   jumpSound: 
   landSound: 
   aiTargetPos: {fileID: 1493244232}
-  animator: {fileID: 1083770646782647980}
 --- !u!95 &1083770646782647980
 Animator:
   serializedVersion: 3
