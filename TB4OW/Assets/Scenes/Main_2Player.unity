@@ -5227,9 +5227,9 @@ GameObject:
   - component: {fileID: 1408831519634132946}
   - component: {fileID: 1408831519634132947}
   - component: {fileID: 1408831519634132945}
-  - component: {fileID: 7033330615366324282}
   - component: {fileID: 1083770647182096137}
   - component: {fileID: 915331322344038871}
+  - component: {fileID: 7033330615366324282}
   - component: {fileID: 1408831519634132957}
   m_Layer: 9
   m_Name: Player 1
@@ -5256,10 +5256,6 @@ MonoBehaviour:
   curWeapon: {fileID: 0}
   curPercent: 0
   isAI: 0
-  twoPlayers: 0
-  player2: 0
-  ProjectilePrefab: {fileID: 7986960856216423950, guid: 6decd159d654b1d4d858edb6b909be1c,
-    type: 3}
   aiTargetPos: {fileID: 0}
   leftMoveKey: 97
   rightMoveKey: 100
@@ -5455,10 +5451,6 @@ MonoBehaviour:
   curWeapon: {fileID: 0}
   curPercent: 0
   isAI: 0
-  twoPlayers: 0
-  player2: 0
-  ProjectilePrefab: {fileID: 7986960856216423950, guid: 6decd159d654b1d4d858edb6b909be1c,
-    type: 3}
   aiTargetPos: {fileID: 0}
   leftMoveKey: 276
   rightMoveKey: 275
@@ -5597,7 +5589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed46e68403c6dfa479181dd878fb97d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 500
+  m_JumpForce: 400
   jumpSound: PenguinJump
   audioManager: {fileID: 1895932478}
   m_MovementSmoothing: 0.05
@@ -5635,7 +5627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed46e68403c6dfa479181dd878fb97d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 500
+  m_JumpForce: 400
   jumpSound: PenguinJump
   audioManager: {fileID: 1895932478}
   m_MovementSmoothing: 0.05
