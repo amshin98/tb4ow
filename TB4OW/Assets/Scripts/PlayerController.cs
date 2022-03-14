@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController2D))]
 public class PlayerController : MonoBehaviour
@@ -15,19 +16,19 @@ public class PlayerController : MonoBehaviour
 	[Header("Player Parameters")]
 	public WeaponController curWeapon;
 	public float curPercent = 0;
-	public HealthBar healthBar;
 	public bool isAI = false;
 
 	[Header("Script References")]
 	public ProjectileBehavior ProjectilePrefab;
-	public string jumpSound;
-	public string landSound;
 	public Transform aiTargetPos;
 
 	float horizontalMove = 0f;
 	bool jump = false;
 	bool attack = false;
 	bool interact = false;
+
+	private float knockbackStartTime = 0;
+	private float knockbackDuration = 0.5f;
 	
 
 	private void Awake()
@@ -38,8 +39,13 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		horizontalMove = Input.GetAxisRaw("Horizontal") * movementSpeed;
 
+		if (Time.time - knockbackStartTime >= knockbackDuration)
+		{
+			controller.animator.SetFloat("Knocking", 0.0f);
+		}
+
+		horizontalMove = Input.GetAxisRaw("Horizontal") * movementSpeed;
 		jump = Input.GetButton("Jump");
 
 		if(curWeapon != null)
@@ -73,9 +79,13 @@ public class PlayerController : MonoBehaviour
 	{
 		if (curWeapon != null)
 		{
-			// Drop weapon
-			curWeapon.transform.parent = null;
-			curWeapon = null;
+			if (!curWeapon.GetAttacking())
+			{
+				// Drop weapon
+				curWeapon.ToggleEquipped();
+				curWeapon.transform.parent = null;
+				curWeapon = null;
+			}
 		}
 		else
 		{
@@ -84,7 +94,6 @@ public class PlayerController : MonoBehaviour
 
 			if (nearestWeapon != null)
 			{
-
 				// Pick up, equip, and active weapon
 				curWeapon = nearestWeapon.GetComponent<WeaponController>();
 				curWeapon.transform.parent = gameObject.transform;
@@ -115,9 +124,15 @@ public class PlayerController : MonoBehaviour
 		return nearestWeapon; 
 	}
 
+	public void Knockback()
+	{
+		controller.animator.SetFloat("Knocking", 1);
+		knockbackStartTime = Time.time;
+	}
+
 	public void Damage(float value)
 	{
 		curPercent += value;
-		healthBar.setSliderHealth((int)curPercent);
+		//healthBar.setSliderHealth((int)curPercent);
 	}
 }
