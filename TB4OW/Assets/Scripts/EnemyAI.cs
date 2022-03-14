@@ -55,7 +55,7 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // use max dimension of current weapon to calculate range of attacks
+        // TurnTowardsPlayer();
 
         if(selfPlayerRef.curWeapon == null){
             GameObject nearestWeapon = GetNearestWeapon();
@@ -82,13 +82,13 @@ public class EnemyAI : MonoBehaviour
                 }
                 else{
                     // shoving match
-                    target = otherPlayerGO.transform;
+                    target = otherPlayerRef.aiTargetPos;
                     MoveToTarget();
                 }
             }
         }
         else{
-            target = otherPlayerGO.transform;
+            target = otherPlayerRef.aiTargetPos;
 
             float weaponRange = GetRangeOfWeapon(selfPlayerRef.curWeapon);
 
@@ -119,9 +119,17 @@ public class EnemyAI : MonoBehaviour
                 //Debug.Log("Move To Player");
                 MoveToTarget();
             }
-/*            target = otherPlayerGO.transform;
-            MoveToTarget();*/
     
+        }
+    }
+
+    private void TurnTowardsPlayer(){
+        if(transform.position.x - otherPlayerGO.transform.position.x < 0){
+            selfPlayerRef.controller.m_FacingRight = true;
+        }
+        else{
+            selfPlayerRef.controller.m_FacingRight = false;
+
         }
     }
 
@@ -150,6 +158,7 @@ public class EnemyAI : MonoBehaviour
                     nearestWeapon = weapon;
             }
         }
+
         return nearestWeapon; 
     }
 

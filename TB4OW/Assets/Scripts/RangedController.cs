@@ -4,13 +4,14 @@ public class RangedController : WeaponController
 {
     public static SpriteRenderer spriteRenderer;
 
-    private const float X_OFFSET = 0f;
-    private const float Y_OFFSET = -0.3f;
+    private const float X_OFFSET_R = 0.5f;
+    private const float X_OFFSET_L = -0.5f;
+    private const float Y_OFFSET = 0.0f;
 
     public ProjectileBehavior projectile;
     public static float fireRate = 1f;
 
-    public static Vector3 equipPos = new Vector3(0.192f, 0.002f, 0);
+    public static Vector3 equipPos = new Vector3(1f, 0.002f, 0);
 
     RangedController() : base(fireRate, equipPos, spriteRenderer, "fish bucket") {
         base.percentDamage = 10f;
@@ -24,9 +25,10 @@ public class RangedController : WeaponController
 
     override public void UseWeapon()
     {
-        Debug.Log("here");
         // Shoot projectile
+        var xOffset = transform.parent.rotation.y == 0 ? X_OFFSET_R : X_OFFSET_L;
+        Quaternion rotation = Quaternion.Euler(0, isFacingRight ? 180 : 0, 0);
         Instantiate(projectile,
-            transform.position + new Vector3(X_OFFSET, Y_OFFSET, 0), transform.rotation);
+            transform.position + new Vector3(xOffset, Y_OFFSET, 0), rotation);
     }
 }
