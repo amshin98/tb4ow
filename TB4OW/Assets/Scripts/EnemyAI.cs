@@ -191,8 +191,10 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Movement
-        selfPlayerRef.controller.Move(direction.x * Time.fixedDeltaTime * selfPlayerRef.movementSpeed, false, jump);
-        // TurnTowardsPlayer();
+        float moveVal = direction.x * Time.fixedDeltaTime * selfPlayerRef.movementSpeed;
+        Debug.Log(moveVal);
+        selfPlayerRef.controller.Move(moveVal, false, jump);
+        // TurnTowardsPlayer(moveVal);
 
         // Next Waypoint
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
@@ -200,28 +202,20 @@ public class EnemyAI : MonoBehaviour
         {
             currentWaypoint++;
         }
-
-        // Direction Graphics Handling
-        if (directionLookEnabled)
-        {
-            if (rb.velocity.x > 0.05f)
-            {
-                transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
-            else if (rb.velocity.x < -0.05f)
-            {
-                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
-        }
     }
 
-    // private void TurnTowardsPlayer(){
-    //     if(transform.position.x - otherPlayerGO.transform.position.x < 0){
-    //         selfPlayerRef.controller.m_FacingRight = true;
+    // private void TurnTowardsPlayer(float moveVal){
+    //     Debug.Log(moveVal);
+    //     Debug.Log(transform.localScale.x);
+    //     if(moveVal < 0 && transform.localScale.x > 0){
+    //         Vector3 theScale = transform.localScale;
+	// 	    theScale.x *= -1;
+	// 	    transform.localScale = theScale;
     //     }
-    //     else{
-    //         selfPlayerRef.controller.m_FacingRight = false;
-
+    //     else if(moveVal > 0 && transform.localScale.x < 0){
+    //         Vector3 theScale = transform.localScale;
+	// 	    theScale.x *= -1;
+	// 	    transform.localScale = theScale;  
     //     }
     // }
 

@@ -1870,10 +1870,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3135441305455237620, guid: 8ed1d7c032e25104da7a4a5008a12b4f,
+        type: 3}
+      propertyPath: isAI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3135441305455237620, guid: 8ed1d7c032e25104da7a4a5008a12b4f,
+        type: 3}
+      propertyPath: pickupRange
+      value: 0.65
+      objectReference: {fileID: 0}
     - target: {fileID: 3135441305455237621, guid: 8ed1d7c032e25104da7a4a5008a12b4f,
         type: 3}
       propertyPath: m_Name
       value: AI_Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3135441305455237623, guid: 8ed1d7c032e25104da7a4a5008a12b4f,
+        type: 3}
+      propertyPath: isAI
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3135441305455237623, guid: 8ed1d7c032e25104da7a4a5008a12b4f,
         type: 3}
@@ -1893,13 +1908,18 @@ PrefabInstance:
     - target: {fileID: 3135441305455237626, guid: 8ed1d7c032e25104da7a4a5008a12b4f,
         type: 3}
       propertyPath: followEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3135441305455237626, guid: 8ed1d7c032e25104da7a4a5008a12b4f,
         type: 3}
       propertyPath: otherPlayerGO
       value: 
       objectReference: {fileID: 792776224}
+    - target: {fileID: 3135441305455237626, guid: 8ed1d7c032e25104da7a4a5008a12b4f,
+        type: 3}
+      propertyPath: itemPickupDistThreshold
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3135441305455237627, guid: 8ed1d7c032e25104da7a4a5008a12b4f,
         type: 3}
       propertyPath: m_RootOrder

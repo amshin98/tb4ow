@@ -15,6 +15,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
+	[SerializeField] private bool isAI;
 
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
@@ -60,6 +61,7 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
+	private bool lastMovePositive = true;
 	public void Move(float move, bool crouch, bool jump)
 	{
 		//only control the player if grounded or airControl is turned on
@@ -74,17 +76,22 @@ public class CharacterController2D : MonoBehaviour
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
 			// If the input is moving the player right and the player is facing left...
-			if (move > 0 && !m_FacingRight)
+			if(lastMovePositive == move > 0)
 			{
-				// ... flip the player.
-				Flip();
+				if (move > 0 && !m_FacingRight)
+				{
+					// ... flip the player.
+					Flip();
+				}
+				// Otherwise if the input is moving the player left and the player is facing right...
+				else if (move < 0 && m_FacingRight)
+				{
+					// ... flip the player.
+					Flip();
+				}
 			}
-			// Otherwise if the input is moving the player left and the player is facing right...
-			else if (move < 0 && m_FacingRight)
-			{
-				// ... flip the player.
-				Flip();
-			}
+
+			lastMovePositive = move > 0;
 		}
 		// If the player should jump...
 		if (m_Grounded && jump)
