@@ -8,8 +8,19 @@ public class LifeStock : MonoBehaviour
     //Camera.Bounds??
 
     public GameObject player;
+    public PlayerController forResWeapons;
+   
+
+    public Transform hammer;
+    public Transform sword;
+    public Transform bucket;
+    //public GameObject sword;
+    //public GameObject bucket;
     //public GameObject player2;
     //public GameObject player3;
+    private Vector2 hammerPos;
+    private Vector2 swordPos;
+    private Vector2 bucketPos;
     public Camera cam;
 
     public GameObject spawnPoint;
@@ -20,6 +31,9 @@ public class LifeStock : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        hammerPos = hammer.transform.position; 
+        swordPos = sword.transform.position; 
+        bucketPos = bucket.transform.position; 
         health = 3;
         heart1.gameObject.SetActive(true);
         heart2.gameObject.SetActive(true);
@@ -91,5 +105,22 @@ public class LifeStock : MonoBehaviour
         //Vector2 spawnPoint = new Vector2(0, 0);
         //Instantiate(player, spawnPoint, Quaternion.identity);
         player.transform.position = spawnPoint.transform.position;
+        if(forResWeapons.curWeapon is HammerController){
+        forResWeapons.curWeapon.transform.parent = null;
+        forResWeapons.curWeapon = null;
+        hammer.position = hammerPos;
+        }
+        if(forResWeapons.curWeapon is SwordController){
+        forResWeapons.curWeapon.transform.parent = null;
+        forResWeapons.curWeapon = null;
+        sword.position = swordPos;
+        }
+        if(forResWeapons.curWeapon is RangedController){
+        forResWeapons.curWeapon.transform.parent = null;
+        forResWeapons.curWeapon = null;
+        bucket.position = bucketPos;
+        }
+        // sword.transform.position = swordPos;
+        // bucket.transform.position = bucketPos;
     }
 }
