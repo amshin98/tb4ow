@@ -8,7 +8,11 @@ public class LifeStock : MonoBehaviour
     //Camera.Bounds??
 
     public GameObject player;
+    //public GameObject player2;
+    //public GameObject player3;
     public Camera cam;
+
+    public GameObject spawnPoint;
 
     public GameObject heart1, heart2, heart3, gameOver;
     public static int health;
@@ -61,6 +65,7 @@ public class LifeStock : MonoBehaviour
         {
             health -= 1;
             SpawnObject();
+            //Destroy(player);
         }
     }
 
@@ -83,6 +88,8 @@ public class LifeStock : MonoBehaviour
 
     public void SpawnObject()
     {
-        Instantiate(player, transform.position, transform.rotation);
+        //Vector2 spawnPoint = new Vector2(0, 0);
+        //Instantiate(player, spawnPoint, Quaternion.identity);
+        player.transform.position = spawnPoint.transform.position;
     }
 }
