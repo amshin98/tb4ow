@@ -9,9 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MvtProjPlaytest.unity
     guid: f0ff4a58738e0df429e68260fb1f1e6c
   - enabled: 1
+    path: Assets/Scenes/IntroCutscene.unity
+    guid: de515effed809b24da621605c25c6387
+  - enabled: 1
     path: Assets/Scenes/StartScreen.unity
     guid: 204603e027eed6c4cb8a8a22671e589b
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: bb2bb1102c649da4f82b0fb447fbd570
+  - enabled: 1
+    path: Assets/Scenes/Main_2Player.unity
+    guid: 7edcaeea30b46cef68bb905c80e83c40
   m_configObjects: {}
