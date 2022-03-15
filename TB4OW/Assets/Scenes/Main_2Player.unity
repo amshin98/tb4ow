@@ -2024,6 +2024,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3363546231036057752, guid: 0e34840f9b97b6047b1b09cc88a13b55,
         type: 3}
+      propertyPath: _fireRate
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3363546231036057752, guid: 0e34840f9b97b6047b1b09cc88a13b55,
+        type: 3}
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 1895932478}
@@ -4180,6 +4185,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 267767507653282467, guid: e07fc536207219b44a7bd09b2c2d8632,
+        type: 3}
+      propertyPath: _fireRate
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 267767507653282467, guid: e07fc536207219b44a7bd09b2c2d8632,
         type: 3}
       propertyPath: audioManager
