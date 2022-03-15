@@ -26,6 +26,7 @@ public class LifeStock : MonoBehaviour
     public GameObject playerHeart1, playerHeart2, playerHeart3, gameOver;
     public int health;
     public UnityEvent deathEvent;
+    public UnityEvent gameOverEvent;
 
     // Use this for initialization
     private void Start()
@@ -40,6 +41,7 @@ public class LifeStock : MonoBehaviour
         gameOver.gameObject.SetActive(false);
     }
 
+    private bool firstTime = true;
     // Update is called once per frame
     private void Update()
     {
@@ -64,10 +66,15 @@ public class LifeStock : MonoBehaviour
                 playerHeart3.gameObject.SetActive(false);
                 break;
             case 0:
-                playerHeart1.gameObject.SetActive(false);
-                playerHeart2.gameObject.SetActive(false);
-                playerHeart3.gameObject.SetActive(false);
-                gameOver.gameObject.SetActive(true);
+                if (firstTime)
+                {
+                    playerHeart1.gameObject.SetActive(false);
+                    playerHeart2.gameObject.SetActive(false);
+                    playerHeart3.gameObject.SetActive(false);
+                    gameOver.gameObject.SetActive(true);
+                    gameOverEvent.Invoke();
+                    firstTime = false;
+                }
                 break;
         }
 

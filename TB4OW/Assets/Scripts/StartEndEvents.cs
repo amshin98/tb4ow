@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 public class StartEndEvents : MonoBehaviour
 {
+    [SerializeField] private float startBattleDelay = 1.8f;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private UnityEvent loadEvents;
     [SerializeField] private UnityEvent startBattleEvents;
     [SerializeField] private UnityEvent cleanupEvents;
 
-    [SerializeField] private float startBattleDelay = 4f;
-    public UnityEvent endEvents;
+
     private System.Random rand;
     void Start()
     {
@@ -36,11 +36,6 @@ public class StartEndEvents : MonoBehaviour
     public void InvokeCleanupEvents()
     {
         cleanupEvents.Invoke();
-    }
-
-    public void InvokeEndEvents()
-    {
-        endEvents.Invoke();
     }
 
 

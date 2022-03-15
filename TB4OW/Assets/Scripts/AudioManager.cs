@@ -29,6 +29,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+        Debug.Log("Playing: " + name);
     }
 
     public void PauseAll()

@@ -142,7 +142,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: PenguinJump
     clip: {fileID: 8300000, guid: 179c2d747a3b1654d97107ac4ec68227, type: 3}
-    volume: 1
+    volume: 0.574
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -172,6 +172,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Sword-Swing
     clip: {fileID: 8300000, guid: 470b12511538b4940aacfc2d4af908a2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BattleEnd
+    clip: {fileID: 8300000, guid: 21f2b9e3fa623924db348ed6153e9bb3, type: 3}
     volume: 1
     pitch: 1
     loop: 0
