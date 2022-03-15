@@ -134,17 +134,21 @@ public class EnemyAI : MonoBehaviour
 
         // get all weapons in scene
         GameObject[] sceneWeapons = GameObject.FindGameObjectsWithTag("weapon");
+        // Debug.Log(sceneWeapons.Length);
         float minDist = float.MaxValue;
 
         // iterate through each one
         foreach (GameObject weapon in sceneWeapons)
         {
             // calculate the distance to it
-            if(Vector2.Distance(weapon.transform.position, transform.position) < minDist)
-            {
+            // Debug.Log("Distance to " + weapon.GetComponent<WeaponController>().label + ": " + Vector2.Distance(weapon.transform.position, transform.position));
+            float dist = Vector2.Distance(weapon.transform.position, transform.position);
+            if (dist < minDist &&
                 // if the player is not holding said weapon
-                if(weapon.GetComponent<WeaponController>() != otherPlayerRef.curWeapon)
-                    nearestWeapon = weapon;
+                weapon.GetComponent<WeaponController>() != otherPlayerRef.curWeapon)
+            {
+                nearestWeapon = weapon;
+                minDist = dist;
             }
         }
 
@@ -191,7 +195,7 @@ public class EnemyAI : MonoBehaviour
 
         // Movement
         float moveVal = direction.x * Time.fixedDeltaTime * selfPlayerRef.movementSpeed;
-        Debug.Log(moveVal);
+        // Debug.Log(moveVal);
         selfPlayerRef.controller.Move(moveVal, false, jump);
         // TurnTowardsPlayer(moveVal);
 

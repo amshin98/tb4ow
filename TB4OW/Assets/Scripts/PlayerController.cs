@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 	public float curPercent = 0;
 	public bool isAI = false;
 	public bool canMove = true;
+	public float respawnInvincibilitySeconds = 3;
 
 	[Header("Script References")]
 	public Transform aiTargetPos;
@@ -146,4 +147,26 @@ public class PlayerController : MonoBehaviour
 		canMove = value;
     }
 
+	public void SetInvinciblity(bool value)
+    {
+        if (value)
+        {
+			gameObject.layer = 11;
+        }
+        else
+        {
+			gameObject.layer = 9;
+        }
+    }
+
+	public void RespawnInvincibility()
+    {
+		SetInvinciblity(true);
+		Invoke("SetInvincibleFalse", respawnInvincibilitySeconds);
+    }
+
+	private void SetInvincibleFalse()
+    {
+		SetInvinciblity(false);
+    }
 }
