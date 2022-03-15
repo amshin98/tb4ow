@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 	protected bool jump = false;
 
 	protected  float knockbackStartTime = 0;
-	protected  float knockbackDuration = 2f;
+	protected  float knockbackDuration = 0.5f;
 	
 
 	private void Awake()
