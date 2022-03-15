@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	public WeaponController curWeapon;
 	public float curPercent = 0;
 	public bool isAI = false;
+	public bool canMove = true;
 
 	[Header("Script References")]
 	public Transform aiTargetPos;
@@ -25,7 +26,7 @@ public class PlayerController : MonoBehaviour
 	protected bool jump = false;
 
 	protected  float knockbackStartTime = 0;
-	protected  float knockbackDuration = 0.5f;
+	protected  float knockbackDuration = 2f;
 	
 
 	private void Awake()
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour
 	void FixedUpdate()
 	{
 		// Move our character
-		if(!isAI)
+		if(!isAI && canMove)
 		{
 			controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
 			jump = false;
@@ -108,7 +109,7 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private GameObject GetNearestWeapon() {
+	protected GameObject GetNearestWeapon() {
 
 		GameObject nearestWeapon = null;
 
@@ -140,5 +141,9 @@ public class PlayerController : MonoBehaviour
 		curPercent = value;
 	}
 
+	public void SetMove(bool value)
+    {
+		canMove = value;
+    }
 
 }

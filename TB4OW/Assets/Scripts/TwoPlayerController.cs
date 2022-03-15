@@ -70,65 +70,7 @@ public class TwoPlayerController : PlayerController
 		}
 	}
 
-	public void WeaponInteract()
-	{
-		if (curWeapon != null)
-		{
-			if (!curWeapon.GetAttacking())
-			{
-				// Drop weapon
-				curWeapon.ToggleEquipped();
-				curWeapon.transform.parent = null;
-				curWeapon = null;
-			}
-		}
-		else
-		{
-			// Check for weapon pickup
-			GameObject nearestWeapon = GetNearestWeapon();
 
-			if (nearestWeapon != null)
-			{
-				// Pick up, equip, and active weapon
-				curWeapon = nearestWeapon.GetComponent<WeaponController>();
-				curWeapon.transform.parent = gameObject.transform;
-				curWeapon.Equip();
-				curWeapon.ToggleEquipped();
-			}
-		}
-	}
-
-	private GameObject GetNearestWeapon() {
-
-		GameObject nearestWeapon = null;
-
-		// get all weapons in scene
-		GameObject[] sceneWeapons = GameObject.FindGameObjectsWithTag("weapon");
-		float minDist = float.MaxValue;
-
-		foreach (GameObject weapon in sceneWeapons)
-		{
-			float dist = Vector2.Distance(weapon.transform.position, transform.position);
-			if (dist <= pickupRange && dist < minDist && !weapon.GetComponent<WeaponController>().GetEquipped())
-			{
-				minDist = dist;
-				nearestWeapon = weapon;
-			}
-		}
-
-		return nearestWeapon; 
-	}
-
-	public void Knockback()
-	{
-		controller.animator.SetFloat("Knocking", 1);
-		knockbackStartTime = Time.time;
-	}
-
-	public void SetDamage(float value)
-	{
-		curPercent = value;
-	}
 
 
 }

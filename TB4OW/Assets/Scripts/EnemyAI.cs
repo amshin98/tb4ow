@@ -20,7 +20,6 @@ public class EnemyAI : MonoBehaviour
     [Header("Custom Behavior")]
     [SerializeField] private  bool followEnabled = true;
     [SerializeField] private  bool jumpEnabled = true;
-    [SerializeField] private  bool directionLookEnabled = true;
     [SerializeField] private  PlayerController selfPlayerRef = null;
     [SerializeField] private  GameObject otherPlayerGO = null;
     [SerializeField] private float minDistance = .2f;

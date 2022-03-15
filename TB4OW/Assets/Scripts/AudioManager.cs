@@ -31,4 +31,12 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    public void PauseAll()
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source.Pause();
+        }
+    }
+
 }
