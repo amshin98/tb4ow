@@ -1794,6 +1794,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4590317755711749138, guid: b72f403653322236a81fad33a4033f2b,
+        type: 3}
+      propertyPath: sounds.Array.data[13].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9518c4ee81da8574a93217fbd30474c1, type: 3}
     - target: {fileID: 4590317755711749139, guid: b72f403653322236a81fad33a4033f2b,
         type: 3}
       propertyPath: m_Name
@@ -4964,6 +4969,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  splashObject: {fileID: 5209226914172645076, guid: d91e82ceb7081244bbdbda514d6fc01a,
+    type: 3}
 --- !u!4 &1987150006
 Transform:
   m_ObjectHideFlags: 0
@@ -5761,6 +5768,12 @@ PrefabInstance:
       objectReference: {fileID: 784523506}
     - target: {fileID: 7690886544771582056, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
         type: 3}
+      propertyPath: splashObject
+      value: 
+      objectReference: {fileID: 5209226914172645076, guid: d91e82ceb7081244bbdbda514d6fc01a,
+        type: 3}
+    - target: {fileID: 7690886544771582056, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
       propertyPath: forResWeapons
       value: 
       objectReference: {fileID: 799941081}
@@ -5878,6 +5891,11 @@ PrefabInstance:
         type: 3}
       propertyPath: gameOverEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: set_enabled
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690886544771582056, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: LoseLife
       objectReference: {fileID: 0}
     - target: {fileID: 7690886544771582056, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
         type: 3}

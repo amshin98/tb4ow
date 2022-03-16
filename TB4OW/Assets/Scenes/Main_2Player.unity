@@ -1630,6 +1630,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4590317755711749138, guid: b72f403653322236a81fad33a4033f2b,
         type: 3}
+      propertyPath: sounds.Array.data[13].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9518c4ee81da8574a93217fbd30474c1, type: 3}
+    - target: {fileID: 4590317755711749138, guid: b72f403653322236a81fad33a4033f2b,
+        type: 3}
       propertyPath: sounds.Array.data[1].volume
       value: 0.841
       objectReference: {fileID: 0}
@@ -4750,6 +4755,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  splashObject: {fileID: 5209226914172645076, guid: d91e82ceb7081244bbdbda514d6fc01a,
+    type: 3}
 --- !u!4 &1987150006
 Transform:
   m_ObjectHideFlags: 0
@@ -6367,6 +6374,12 @@ PrefabInstance:
       propertyPath: playerHeart3
       value: 
       objectReference: {fileID: 784523506}
+    - target: {fileID: 7690886544771582056, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: splashObject
+      value: 
+      objectReference: {fileID: 5209226914172645076, guid: d91e82ceb7081244bbdbda514d6fc01a,
+        type: 3}
     - target: {fileID: 7690886544771582056, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
         type: 3}
       propertyPath: forResWeapons
