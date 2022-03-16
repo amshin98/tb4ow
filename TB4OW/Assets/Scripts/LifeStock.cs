@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class LifeStock : MonoBehaviour
 {
@@ -41,6 +42,11 @@ public class LifeStock : MonoBehaviour
         gameOver.gameObject.SetActive(false);
     }
 
+    private void ReturnToSS()
+    {
+        SceneManager.LoadScene("StartScreen");
+    }
+
     private bool firstTime = true;
     // Update is called once per frame
     private void Update()
@@ -73,6 +79,7 @@ public class LifeStock : MonoBehaviour
                     playerHeart3.gameObject.SetActive(false);
                     gameOver.gameObject.SetActive(true);
                     gameOverEvent.Invoke();
+                    Invoke("ReturnToSS", 4.0f);
                     firstTime = false;
                 }
                 break;
