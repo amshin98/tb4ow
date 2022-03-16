@@ -29,6 +29,8 @@ public class LifeStock : MonoBehaviour
     public UnityEvent deathEvent;
     public UnityEvent gameOverEvent;
 
+    public GameObject splashObject;
+
     // Use this for initialization
     private void Start()
     {
@@ -90,6 +92,7 @@ public class LifeStock : MonoBehaviour
 
         if (!isVisible(cam, player))
         {
+            MakeSplash(player.transform.position);
             deathEvent.Invoke();
             health -= 1;
             SpawnObject();
@@ -139,5 +142,20 @@ public class LifeStock : MonoBehaviour
         }
         // sword.transform.position = swordPos;
         // bucket.transform.position = bucketPos;
+    }
+
+    public void MakeSplash(Vector3 pos)
+    {
+        // x variable, when in viewport space clamp to 0 to 1. y should be 0 in viewport space
+        var viewPos = Camera.main.WorldToViewportPoint(pos);
+        viewPos.x = Mathf.Clamp(viewPos.x, 0f, 1f);
+        viewPos.y = 0.0f;
+
+        var camRot = Camera.main.transform.rotation;
+
+        var splash = Instantiate(splashObject, Camera.main.ViewportToWorldPoint(viewPos), camRot);
+        splash.transform.position += new Vector3(0f, 3.0f, 0f);
+        splash.transform.up = new Vector3(0,1,0);
+        Destroy(splash, splash.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
     }
 }

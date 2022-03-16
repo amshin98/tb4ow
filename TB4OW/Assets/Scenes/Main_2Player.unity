@@ -4755,6 +4755,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  splashObject: {fileID: 5209226914172645076, guid: d91e82ceb7081244bbdbda514d6fc01a,
+    type: 3}
 --- !u!4 &1987150006
 Transform:
   m_ObjectHideFlags: 0
@@ -6372,6 +6374,12 @@ PrefabInstance:
       propertyPath: playerHeart3
       value: 
       objectReference: {fileID: 784523506}
+    - target: {fileID: 7690886544771582056, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
+        type: 3}
+      propertyPath: splashObject
+      value: 
+      objectReference: {fileID: 5209226914172645076, guid: d91e82ceb7081244bbdbda514d6fc01a,
+        type: 3}
     - target: {fileID: 7690886544771582056, guid: 3af4a88a4e071dd21bf0c49ee3d22bac,
         type: 3}
       propertyPath: forResWeapons
