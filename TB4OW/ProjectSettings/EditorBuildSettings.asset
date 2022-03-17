@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/MvtProjPlaytest.unity
-    guid: f0ff4a58738e0df429e68260fb1f1e6c
   - enabled: 1
     path: Assets/Scenes/IntroCutscene.unity
     guid: de515effed809b24da621605c25c6387
