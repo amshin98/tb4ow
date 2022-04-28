@@ -1,0 +1,52 @@
+@charset "UTF-8";
+/* CSS Document (charset statement must appear first)*/
+
+/*========================================================================
+Cal Poly Template Print Stylesheet
+
+CSS maintained by
+Information Technology Services
+California Polytechnic State University
+San Luis Obispo, CA 93407
+
+========================================================================
+
+DO NOT EDIT THIS STYLESHEET.  Instead edit the print.css and the screen.css files in the "css" folder.
+
+Style Name: "Cal Poly Standard"
+XHTML Code Base: Version 5.0.1
+
+History:
+2012-05-09 	Beta release: Spring Quarter 2012
+2012-06-06  5.0.1 Production release
+
+=========================================================================*/
+
+/* Remove unwanted elements */
+#rightCol,
+#accessibilityNav,
+#audienceNav,
+#myCalPolyNav,
+#utilityNav,
+#cp
+{
+display: none;
+}
+
+#mainCol,
+#breadcrumb
+{
+width: 100%;
+}
+
+/* Change text colour to black (useful for light text on a dark background) */
+h1, h2, p
+{
+color: #000;
+}
+
+/* Improve colour contrast of links */
+a:link, a:visited
+{
+color: #2E562C;
+}

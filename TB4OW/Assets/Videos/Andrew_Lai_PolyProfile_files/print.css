@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#myCalPolyNav, #accessibilityNav, #breadcrumb, #rightcol, #cp, #contentNav, #mainLeftFull, #footer_links, #footer_help, div.searchBox, div#alerts, .backNav {
+	display:none;
+}
+
+.showOnPrint {
+	display:block;
+	margin-bottom:20px;
+}
+
+body, #content, #mainLeft {
+	width:100%;
+	max-width:100%;
+	border:none;
+}
+
